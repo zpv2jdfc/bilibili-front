@@ -1,23 +1,5 @@
 <template>
-    <el-menu
-      :default-active="activeIndex"
-      class="el-menu-demo"
-      mode="horizontal"
-      @select="handleSelect"
-    >
-      <el-menu-item index="1">
-        <BiliIcon></BiliIcon>
-      </el-menu-item>
-      <el-sub-menu index="2">
-        <template #title>首页</template>
-        <el-menu-item index="2-1">番剧</el-menu-item>
-        <el-menu-item index="2-2">电影</el-menu-item>
-        <el-menu-item index="2-3">国创</el-menu-item>
-      </el-sub-menu>
-      <el-menu-item index="3">番剧</el-menu-item>
-      <el-menu-item index="4">直播</el-menu-item>
-      <SearchBar></SearchBar>
-    </el-menu>
+  <LeftEntry></LeftEntry>
 
 </template>
   
@@ -25,11 +7,35 @@
   import { ref } from 'vue'
   import SearchBar from './SearchBar.vue'
   import BiliIcon from '../icons/BiliIcon.vue'
-  
-  const activeIndex = ref('1')
-  const activeIndex2 = ref('1')
-  const handleSelect = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
-  }
+  import MenuItem from './MenuItem.vue'
+  import LeftEntry from './LeftEntry.vue'
   </script>
   
+<style scoped>
+.block1 {
+  float: left;
+  width: 74px;
+  margin: 0px 0px 0px 0px; 
+}
+.block1 svg{
+  fill: #09C7F7;
+}
+.block2 {
+  float: left;
+  width: 30%;
+  margin: 0px 0px 0px 0px; 
+}
+.block3 {
+  float: left;
+  width: 20%;
+  margin: 0px 0px 0px 0px; 
+}
+.block4 {
+  float: left;
+  width: 30%;
+  margin: 0px 0px 0px 0px; 
+}
+.icon{
+  margin-top: 6px;
+}
+</style>

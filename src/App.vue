@@ -5,9 +5,7 @@ import HoMePage from './components/HomePage/HomePage.vue'
 
 
 <template>
-  <div class="common-layout">
-    <HoMePage></HoMePage>
-  </div>
+  <HoMePage></HoMePage>
 </template>
 
 
