@@ -2,9 +2,10 @@
     <div class="center-search-bar">
         <form class="nav-searchform">
             <div class="nav-search-content">
-                <input class="nav-search-input" type="text" autocomplete="off" accesskey="s" maxlength="100" x-webkit-speech="" x-webkit-grammar="builtin:translate" value="">
+                <!-- <input class="nav-search-input" type="text" autocomplete="off" accesskey="s" maxlength="100" x-webkit-speech="" x-webkit-grammar="builtin:translate" value=""> -->
+                <input class="nav-search-input" type="text" v-model="searchContent">
             </div>
-            <div class="nav-search-btn">
+            <div class="nav-search-btn" @click="search">
                 <SearchBtn></SearchBtn>
             </div>
         </form>
@@ -12,7 +13,15 @@
 </template>
 
 <script setup lang="ts">
+import { Search } from '@element-plus/icons-vue';
 import SearchBtn from '../icons/SearchBtn.vue';
+import {ref} from 'vue';
+const searchContent = ref('')
+
+function search(){
+    console.log(searchContent.value)
+
+}
 </script>
 
 <style scoped>

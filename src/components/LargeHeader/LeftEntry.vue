@@ -9,17 +9,17 @@
             </a>
         </li>
         <li class="default-li">
-            <a href="/" target="_blank">
+            <a href="/" target="_blank"  @mouseenter="channleShake('anime')" :class="{ shake: disabled1 }">
                 <span>番剧</span>
             </a>
         </li>
         <li class="default-li">
-            <a href="/" target="_blank">
+            <a href="/" target="_blank"  @mouseenter="channleShake('live')" :class="{ shake: disabled2 }">
                 <span>直播</span>
             </a>
         </li>
         <li class="char-4-li">
-            <a href="/" target="_blank">
+            <a href="/" target="_blank" @mouseenter="channleShake('game')" :class="{ shake: disabled3 }">
                 <span>游戏中心</span>
             </a>
         </li>
@@ -28,6 +28,31 @@
 
 <script setup lang="ts">
 import BiliIcon from '../icons/BiliIcon.vue'
+import {ref} from 'vue'
+const disabled1 = ref(false);
+const disabled2 = ref(false);
+const disabled3 = ref(false);
+
+function channleShake(channel: string){
+    switch(channel){
+        case 'anime':  disabled1.value = true; 
+        setTimeout(() => {
+            disabled1.value = false
+        }, 400) 
+        break;
+        case 'live':  disabled2.value = true;
+        setTimeout(() => {
+            disabled2.value = false
+        }, 400) 
+        break;
+        case 'game':  disabled3.value = true;
+        setTimeout(() => {
+            disabled3.value = false
+        }, 400) 
+        break;
+    }
+
+}
 </script>
 
 <style scoped>
@@ -96,5 +121,30 @@ ul li:first-child{
     font-size: 14px;
     line-height: 20px;
     cursor: pointer;
+}
+.shake {
+    animation: shake 0.3s cubic-bezier(0.4, 0.3, 0.6, 0.7) both;
+    transform: translate3d(0, 0, 0);
+}
+@keyframes shake {
+    10%,
+    90%{
+        transform: translate3d(0, -1px, 0);
+    }
+    20%,
+    80%{
+        transform: translate3d(0, -3px, 0);
+    }
+    40%,
+    60%{
+        transform: translate3d(0, -4px, 0);
+    }
+    50% {
+        transform: translate3d(0, -5px, 0);
+    }
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
 }
 </style>
