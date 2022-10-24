@@ -16,11 +16,18 @@
 import { Search } from '@element-plus/icons-vue';
 import SearchBtn from '../icons/SearchBtn.vue';
 import {ref} from 'vue';
+import  {Base}  from "@/components/constant/index";
+import router from '@/router'
 const searchContent = ref('')
 
 function search(){
-    console.log(searchContent.value)
-
+    const routeData = router.resolve({
+    path: 'all',
+    query: {
+        keyword: searchContent.value
+    }
+    })
+    window.open(routeData.href, '_blank')
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
     <ul>
         <li >
-            <a class="icon-home" href="https:/www.bilibili.com" target="_blank">
+            <a class="icon-home" href="/" target="_blank">
                 <BiliIcon></BiliIcon>
                 <div class="mini-header-title">
                     <span>首页</span>

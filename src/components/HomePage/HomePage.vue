@@ -2,6 +2,7 @@
     <div class="bili-body">
       <LargeHeader></LargeHeader>
     </div>
+    <router-view></router-view>
 </template>
   
 <script setup lang="ts">
