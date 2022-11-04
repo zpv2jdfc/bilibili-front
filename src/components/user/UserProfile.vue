@@ -13,6 +13,7 @@ function getUserInfo() {
 	const param = {
 		userID: '10001',
 		userName: 'Mike',
+		token: '13444',
 	}
 	apiGetUserInfo(param).then((res) => {
 		console.log(res)
