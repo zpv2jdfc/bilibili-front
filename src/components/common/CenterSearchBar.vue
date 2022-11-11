@@ -95,7 +95,7 @@ function search(){
 }
 /* 聚焦搜索框变灰色 */
 .nav-search-input:focus{
-    background-color: #E6E6E6;
+    background-color: #EEEEEE;
 }
 /* 按钮划过变灰色 */
 .nav-search-btn:hover{
