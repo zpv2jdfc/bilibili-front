@@ -101,6 +101,9 @@ function iconShake(channel: string){
     text-align: center;
     width: 100px;
     height: 34px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
 }
 .v-popover-wrap{
     position: relative;
