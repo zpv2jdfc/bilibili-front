@@ -1,13 +1,12 @@
 <template>
     <ul class="right-entry">
-        <li class="header-avatar">
+        <li class="header-avatar" @click="log">
             <div style="position:relative;">
-                <a href="" target="_blank" class="header_entry-mini">
+                <div class="header_entry-mini">
                     <picture class="v-img">
-                        <!-- <source srcset="https://i2.hdslb.com/bfs/face/99953a4bdcb321329a40a87ef467b9eb28b483d0.jpg@120w_120h_1c.avif"> -->
                         <img src="https://i2.hdslb.com/bfs/face/99953a4bdcb321329a40a87ef467b9eb28b483d0.jpg@120w_120h_1c.avif"  loading="lazy" onload>
                     </picture>
-                </a>
+                </div>
             </div>
         </li>
         <li class="v-popover-wrap">
@@ -40,7 +39,7 @@ import Upload from '../icons/Upload.vue'
 import Favorite from '../icons/Favorite.vue'
 import History from '../icons/History.vue'
 import {ref} from 'vue'
-
+import {logConstant} from '../../api/store'
 const disabled1 = ref(false);
 const disabled2 = ref(false);
 function iconShake(channel: string){
@@ -57,6 +56,13 @@ function iconShake(channel: string){
         break;
     }
 
+}
+function log(){
+    if(logConstant.logState=='notLogged'){
+        logConstant.logDisplay="flex";
+    }else if(logConstant.logState=='logged'){
+
+    }
 }
 </script>
 
@@ -80,6 +86,7 @@ function iconShake(channel: string){
     width: 38px;
     height: 38px;
     border-radius: 50%;
+    cursor: pointer;
 }
 .v-img{
     position: relative;

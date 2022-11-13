@@ -1,17 +1,21 @@
 <template>
     <div class="bili-mini-mask" ref="logBoard">
-        <LogPage @close="close"></LogPage>
+        <LogPage></LogPage>
     </div>
 </template>
 
 <script setup lang="ts">
 import LogPage from './LogPage.vue'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
+import {logConstant} from '../../api/store'
 
 const logBoard = ref()
-function close(){
-    logBoard.value.style.display="none"
-}
+onMounted(() => {
+    logBoard.value.style.display=logConstant.logDisplay
+	})
+watch(logConstant, (newS) => {
+    logBoard.value.style.display = newS.logDisplay
+})
 </script>
 
 <style scoped>

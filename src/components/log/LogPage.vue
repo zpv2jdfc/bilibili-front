@@ -1,6 +1,6 @@
 <template>
     <div class="bili-mini">
-        <div class="bili-mini-close" @click="$emit('close')"></div>
+        <div class="bili-mini-close" @click="close"></div>
         <div class="bili-mini-content">
             <div class="bili-mini-login-wrapepr">
                 <!-- 登录方式切换标签 -->
@@ -11,12 +11,12 @@
                 <div class="bili-mini-password-wrapper">
                     <div class="bili-mini-account">
                         <span class="text">账号</span>
-                        <input type="text" placeholder="请输入账号">
+                        <input type="text" placeholder="请输入账号" v-model="username">
                     </div>
                     <div class="bili-mini-password">
                         <div clss="left">
                             <span class="text">密码</span>
-                            <input placeholder="请输入密码" type="password">
+                            <input placeholder="请输入密码" type="password" v-model="password">
                         </div>
                         <div class="eye-btn" style="--thememini-color:#00a1d6;">
                             <EyeBtn></EyeBtn>
@@ -25,8 +25,8 @@
                 </div>
                 <!-- 注册、登录 按钮-->
                 <div class="bili-mini-login-register-wrapper">
-                    <div class="universal-btn register-btn">注册</div>
-                    <div class="universal-btn login-btn">登录</div>
+                    <div class="universal-btn register-btn" @click="register">注册</div>
+                    <div class="universal-btn login-btn" @click="login">登录</div>
                 </div>
                 <!-- 三方登录 -->
                 <div class="third-party-login-wrapper">
@@ -41,7 +41,28 @@
 </template>
 <script setup lang="ts">
 import EyeBtn from '../icons/EyeBtn.vue'
+import {logConstant} from '../../api/store'
+import {apiUserLogin, apiUserReg} from '@/api/logreg'
 
+var username=""
+var password=""
+function close(){
+    logConstant.logDisplay = "none"
+}
+function login(){
+	const param = {
+		userName: username,
+		userPW: password,
+	}
+    var R
+	apiUserLogin(param).then((res) => {
+		R = res
+	})
+    
+}
+function register(){
+
+}
 </script>
 <style scoped>
 .bili-mini{
