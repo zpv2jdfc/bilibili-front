@@ -41,27 +41,57 @@
 </template>
 <script setup lang="ts">
 import EyeBtn from '../icons/EyeBtn.vue'
-import {logConstant} from '../../api/store'
+import {logConstant, loggedUser} from '../../api/store'
 import {apiUserLogin, apiUserReg} from '@/api/logreg'
-
-var username=""
-var password=""
+import {ref} from 'vue'
+var username=ref('')
+var password=ref('')
 function close(){
     logConstant.logDisplay = "none"
 }
 function login(){
 	const param = {
-		userName: username,
-		userPW: password,
+        identitytype: 'PASSWORD',
+        identifier: username.value,
+        credential: password.value,
 	}
-    var R
+
 	apiUserLogin(param).then((res) => {
-		R = res
+        if(res.code != 10000){
+            log_failed(res.msg)
+        }else{
+            log_success(res.data)
+        }
 	})
-    
 }
 function register(){
-
+    const param = {
+        identitytype: 'PASSWORD',
+        identifier: username.value,
+        credential: password.value,
+	}
+    apiUserReg(param).then((res) => {
+        if(res.code != 10000){
+            log_failed(res.msg)
+        }else{
+            log_success(res.data)
+        }
+	})
+}
+function log_success(data: object){
+    loggedUser.name = data.name;
+    loggedUser.id = data.id;
+    loggedUser.avatar = data.avatar;
+    loggedUser.singature = data.singature;
+    loggedUser.setting = data.setting;  
+    localStorage.setItem('loggedUser', JSON.stringify(loggedUser));
+    logConstant.logState = 'logged'
+    logConstant.logDisplay = 'none'
+    localStorage.setItem('logConstant', JSON.stringify(logConstant));
+    location. reload()  
+}
+function log_failed(data:string){
+    alert(data.msg)
 }
 </script>
 <style scoped>

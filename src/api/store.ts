@@ -9,8 +9,8 @@ export const logConstant = reactive({
 export const loggedUser = reactive({
   id: "",
   name: "",
-  avatar: "",
-  signatuer: "",
+  avatar: "unlogged",
+  singature: "",
   level: "",
   privilege: "",
   status: "",

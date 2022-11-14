@@ -58,11 +58,7 @@ function iconShake(channel: string){
 
 }
 function log(){
-    if(logConstant.logState=='notLogged'){
-        logConstant.logDisplay="flex";
-    }else if(logConstant.logState=='logged'){
 
-    }
 }
 </script>
 

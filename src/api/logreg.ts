@@ -3,8 +3,9 @@ import httpRequest from '@/request/index'
 
 // 定义接口的传参
 interface UserInfoParam {
-	userName: string,
-	userPW: string
+	identitytype: string,
+	identifier: string,
+	credential: string,
 }
 
 // 登录
