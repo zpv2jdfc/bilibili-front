@@ -11,12 +11,12 @@
                 <div class="bili-mini-password-wrapper">
                     <div class="bili-mini-account">
                         <span class="text">账号</span>
-                        <input type="text" placeholder="请输入账号" v-model="username">
+                        <input type="text" placeholder="请输入账号" [(ngModel)]="username">
                     </div>
                     <div class="bili-mini-password">
                         <div clss="left">
                             <span class="text">密码</span>
-                            <input placeholder="请输入密码" type="password" v-model="password">
+                            <input placeholder="请输入密码" type="password" [(ngModel)]="password">
                         </div>
                         <div class="eye-btn" style="--thememini-color:#00a1d6;">
                             <!-- <EyeBtn></EyeBtn> -->
@@ -25,8 +25,8 @@
                 </div>
                 <!-- 注册、登录 按钮-->
                 <div class="bili-mini-login-register-wrapper">
-                    <div class="universal-btn register-btn" (click)="register">注册</div>
-                    <div class="universal-btn login-btn" (click)="login">登录</div>
+                    <div class="universal-btn register-btn" (click)="register()">注册</div>
+                    <div class="universal-btn login-btn" (click)="login()">登录</div>
                 </div>
                 <!-- 三方登录 -->
                 <div class="third-party-login-wrapper">

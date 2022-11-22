@@ -1,0 +1,51 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { InfoService } from './info.service';
+import { HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+@Injectable({
+  providedIn: 'root'
+})
+export class UserService {
+
+  constructor(private http: HttpClient, private infoService: InfoService) { }
+  login(name:string, password:string): Observable<any>{
+    var regInfo = {
+      "name": name,
+      "password": password
+    }
+
+    return this.http.post<any>(this.infoService.base_url+'/auth/login', regInfo);
+  }
+  register(name:string, password:string): any{
+    var regInfo = {
+      identitytype: 'PASSWORD',
+      identifier: name,
+      credential: password,
+    }
+    this.http.post<any>(this.infoService.base_url+'/auth/register', regInfo, {observe: 'response'}).subscribe(
+      (response:any) =>{
+        let body = response.body
+        if(body.code!='10000'){
+          return body;
+        }
+        this.setLocal(body.data,response.headers.get('token'));
+        return {'msg':'ok','code':'10000'}
+      }
+    );
+  }
+  setLocal(info: any, token:string){
+    this.infoService.info = info;
+    this.infoService.token = token;
+    localStorage.setItem('info', JSON.stringify(info));
+    localStorage.setItem('token', token);
+  }
+  clearLocal(){
+    this.infoService.info = {
+      name:'',
+      signature:''
+    }
+    this.infoService.token = ''
+    localStorage.clear();
+  }
+}
