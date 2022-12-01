@@ -28,7 +28,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    
+
 }
 .bili-mini-close{
     position: absolute;
@@ -158,4 +158,8 @@
     font-size: 14px;
     color: #212121;
     box-shadow: inset 0 0 0 20px #fff;
+}
+.logerr{
+  color: red;
+  text-align: center;
 }

@@ -23,6 +23,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="logerr" ng-if="logerr">
+                    <p>{{err_msg}}</p>
+                </div>
                 <!-- 注册、登录 按钮-->
                 <div class="bili-mini-login-register-wrapper">
                     <div class="universal-btn register-btn" (click)="register()">注册</div>

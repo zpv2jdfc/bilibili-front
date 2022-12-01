@@ -2,20 +2,31 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { InfoService } from './info.service';
 import { HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of} from 'rxjs';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
   constructor(private http: HttpClient, private infoService: InfoService) { }
-  login(name:string, password:string): Observable<any>{
+  login(name:string, password:string):Observable<any>{
     var regInfo = {
-      "name": name,
-      "password": password
+      identitytype: 'PASSWORD',
+      identifier: name,
+      credential: password,
     }
-
-    return this.http.post<any>(this.infoService.base_url+'/auth/login', regInfo);
+    let res = null
+    return this.http.post<any>(this.infoService.base_url+'/auth/login', regInfo, {observe: 'response'}).pipe(map(
+      (response:any) =>{
+        let body = response.body
+        if(body.code!='10000'){
+          return body
+        }
+        this.setLocal(body.data,response.headers.get('token'));
+        return {'msg':'ok','code':'10000'}
+      }
+    ));
   }
   register(name:string, password:string): any{
     var regInfo = {
@@ -23,7 +34,7 @@ export class UserService {
       identifier: name,
       credential: password,
     }
-    this.http.post<any>(this.infoService.base_url+'/auth/register', regInfo, {observe: 'response'}).subscribe(
+    return this.http.post<any>(this.infoService.base_url+'/auth/register', regInfo, {observe: 'response'}).pipe(map(
       (response:any) =>{
         let body = response.body
         if(body.code!='10000'){
@@ -32,20 +43,16 @@ export class UserService {
         this.setLocal(body.data,response.headers.get('token'));
         return {'msg':'ok','code':'10000'}
       }
-    );
+    ));
+  }
+  logout(){
+
   }
   setLocal(info: any, token:string){
-    this.infoService.info = info;
-    this.infoService.token = token;
-    localStorage.setItem('info', JSON.stringify(info));
-    localStorage.setItem('token', token);
+    this.infoService.setLocal(info, token);
   }
   clearLocal(){
-    this.infoService.info = {
-      name:'',
-      signature:''
-    }
-    this.infoService.token = ''
-    localStorage.clear();
+    this.infoService.clear();
   }
+
 }

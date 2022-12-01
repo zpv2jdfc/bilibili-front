@@ -10,4 +10,12 @@ export class HomeComponent {
   constructor(public infoService: InfoService,
     public uiService: UiService
     ){}
+  ngOnInit(){
+    this.infoService.init();
+    if(this.infoService.log_state){
+      this.uiService.logreg_window = false
+    }else {
+
+    }
+  }
 }

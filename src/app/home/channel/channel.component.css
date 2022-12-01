@@ -1,0 +1,43 @@
+.bili-header_channel{
+  position: absolute;
+  top: 64px;
+  margin: 0;
+  padding: 0 60px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  position: relative;
+  width: 100%;
+}
+.channel-icons{
+  margin-right: 8px;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+}
+.right-channel-container{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.channel-items_left{
+  padding-right: 30px;
+  position: relative;
+  display: grid;
+  width: 100%;
+  grid-auto-flow: column;
+  grid-column: span 4;
+  grid-gap: 10px;
+  grid-template-rows: repeat(2,1fr);
+  border-right:1px solid #e3e5e7;
+}
+.channel-items_right{
+  width: 240px;
+  grid-column: span 1;
+  grid-row-gap: 10px;
+  grid-auto-flow: column;
+  display: grid;
+  grid-template-rows: repeat(2,1fr);
+  flex-shrink: 0;
+}
