@@ -11,7 +11,8 @@ import { HomeComponent } from './home/home.component';
 import { LogregComponent } from './logreg/logreg.component';
 import { ChannelComponent } from './home/channel/channel.component';
 import { MainComponent } from './home/main/main.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RecommendComponent } from './home/recommend/recommend.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,8 @@ import { MainComponent } from './home/main/main.component';
     HomeComponent,
     LogregComponent,
     ChannelComponent,
-    MainComponent
+    MainComponent,
+    RecommendComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +29,7 @@ import { MainComponent } from './home/main/main.component';
     FormsModule,
     HttpClientModule,
     InfiniteScrollModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

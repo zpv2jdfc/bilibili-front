@@ -1,0 +1,20 @@
+<div class="recommended-container">
+  <ngb-carousel
+    [interval]="100000"
+    class="carousel"
+  >
+    <ng-template ngbSlide *ngFor="let img of recommend_carsouels; index as i">
+      <div class="carousel-caption">
+        <h3>{{img.caption}}</h3>
+      </div>
+      <a [href]="img.link" target="_blank" rel="nofollow noopener noreferrer">
+        <div class="picsum-img-wrapper">
+          <img [src]="img.url" />
+        </div>
+      </a>
+    </ng-template>
+  </ngb-carousel>
+  <div class="recommend-grid">
+    123
+  </div>
+</div>
