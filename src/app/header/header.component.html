@@ -28,7 +28,16 @@
         </div>
     </div>
     <ul class="right-entry">
-        <ng-template [ngIf]="true">
+        <ng-template [ngIf]="!infoService.log_state">
+          <li class="v-popover-wrap header-avatar-wrap">
+            <div class="header-avatar-wrap">
+              <div class="header-login-entry" (click)="login()">
+                <span>登录</span>
+              </div>
+            </div>
+          </li>
+        </ng-template>
+        <ng-template [ngIf]="infoService.log_state">
             <li class="v-popover-wrap header-avatar-wrap">
                 <div class="header-avatar-wrap">
                     <a href="/" target="_blank" class="header-entry-mini">
@@ -36,6 +45,28 @@
                             <img src="https://i2.hdslb.com/bfs/face/99953a4bdcb321329a40a87ef467b9eb28b483d0.jpg@120w_120h_1c" alt="" loading="lazy" onload="">
                         </picture>
                     </a>
+                  <div class="dropdown">
+                    <div style="height: 15px;"></div>
+<!--                    <div class="dropdown-item" (click)="logout()">-->
+<!--                      <div style="display: flex; align-items: center; justify-content: center;">-->
+<!--                        <img style="margin:0 5px 0 0; position: relative; left: 0;" src="assets/svgIcons/logout.svg">-->
+<!--                        <span style="position:relative;">个人信息</span>-->
+<!--                      </div>-->
+<!--                      <div>-->
+<!--                        <img style="transform: rotate(-90deg); " src="assets/svgIcons/right-arrow.svg">-->
+<!--                      </div>-->
+<!--                    </div>-->
+                    <div style="background: #e3e5e7; width: 100%; height: 1px; margin: 10px 0"></div>
+                    <div class="dropdown-item" (click)="logout()">
+                      <div style="display: flex; align-items: center; justify-content: center;">
+                        <img style="margin:0 5px 0 0; position: relative; left: 0;" src="assets/svgIcons/logout.svg">
+                        <span style="position:relative;">退出登录</span>
+                      </div>
+                      <div>
+                        <img style="transform: rotate(-90deg); " src="assets/svgIcons/right-arrow.svg">
+                      </div>
+                    </div>
+                  </div>
                 </div>
             </li>
         </ng-template>

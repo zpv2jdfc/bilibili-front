@@ -46,7 +46,8 @@ export class UserService {
     ));
   }
   logout(){
-
+    this.clearLocal();
+    location.reload();
   }
   setLocal(info: any, token:string){
     this.infoService.setLocal(info, token);

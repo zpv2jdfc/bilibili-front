@@ -4,7 +4,7 @@
     z-index: 1002;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 24px;
     max-width: 2560px;
     width: 100%;
@@ -106,22 +106,65 @@
     height: 32px;
     border: none;
     border-radius: 6px;
-    color: 18191C;
+    color: #18191C;
     line-height: 32px;
     cursor: pointer;
 }
 .right-entry{
-    margin-left: 10px;
-    display: flex;
-    align-items: center;
+  margin-top: 20px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
 }
 .header-avatar-wrap{
-    position: relative;
-    box-sizing: content-box;
-    padding-right: 10px;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
+  position: relative;
+  box-sizing: content-box;
+  padding-right: 10px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.dropdown{
+  position: absolute;
+  top: 50px;
+  padding: 0 24px 18px;
+  width: 200px;
+  /*height: 300px;*/
+  background-color: #fff;
+  cursor: auto;
+  display: none;
+  border: solid 1px #e3e5e7;
+  border-radius: 8px;
+  color: #18191c;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.header-avatar-wrap:hover .dropdown{
+  display: flex;
+}
+.dropdown-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  cursor: pointer;
+}
+.header-login-entry{
+  position: relative;
+  box-sizing: content-box;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  background-color: #00AEEC;
+  font-size: 14px;
+  color: #fff;
 }
 .header-entry-mini{
     position: absolute;

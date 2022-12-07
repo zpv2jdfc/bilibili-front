@@ -4,6 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UiService {
-  logreg_window:boolean = true
+  logreg_window:boolean = false
   constructor() { }
 }

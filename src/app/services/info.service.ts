@@ -20,7 +20,7 @@ export class InfoService {
   }
   init(){
     let temp1 = localStorage.getItem('token');
-    let temp2 = localStorage.getItem('token');
+    let temp2 = localStorage.getItem('info');
     if(temp1!=null && temp1.length>0 && temp2!=null && temp2.length>0){
       this.token = temp1;
       this.info = JSON.parse(temp2)
