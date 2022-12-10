@@ -13,6 +13,9 @@ import { ChannelComponent } from './home/channel/channel.component';
 import { MainComponent } from './home/main/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RecommendComponent } from './home/recommend/recommend.component';
+import { WatchComponent } from './watch/watch.component';
+import { VideoComponent } from './watch/video/video.component';
+import { LeftVideoComponent } from './watch/video/left-video/left-video.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +24,10 @@ import { RecommendComponent } from './home/recommend/recommend.component';
     LogregComponent,
     ChannelComponent,
     MainComponent,
-    RecommendComponent
+    RecommendComponent,
+    WatchComponent,
+    VideoComponent,
+    LeftVideoComponent
   ],
   imports: [
     BrowserModule,

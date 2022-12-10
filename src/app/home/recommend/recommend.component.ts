@@ -16,6 +16,7 @@ export class RecommendComponent {
       (res:any)=> {
         this.recommend_carsouels = res.recommend_carsouels;
         this.recommend_grids = res.recommend_grids;
+        this.recommend_grids = [1,2,3,4]
       }
     )
   }

@@ -1,8 +1,17 @@
-.carousel{
-  top: 200px;
+.recommended-container {
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  grid-template-rows: repeat(2,2fr);
+  grid-gap: 15px;
   padding: 0 60px 0 60px;
+}
+.carousel{
+  grid-column: span 2;
+  grid-row: span 2;
+  /*padding: 0 60px 0 60px;*/
   border-radius: 20px;
-  width: 668px;
+  width: 548px;
   height: 100%;
 }
 .picsum-img-wrapper{
@@ -15,4 +24,10 @@
   width: 100%;
   height: auto;
   border-radius: 20px;
+}
+.recommend-grid-item{
+  height: 223px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
 }

@@ -14,7 +14,24 @@
       </a>
     </ng-template>
   </ngb-carousel>
-  <div class="recommend-grid">
-    123
+  <div class="recommend-grid-item" *ngFor="let item of recommend_grids; index as i">
+    <div style="height: 70%;">
+      <a [href]="item.link" target="_blank">
+        <picture style="border-radius: 5px; width: 264px; height: 148px">
+          <img style="border-radius: 5px; width: 264px; height: 148px"
+               src="https://i1.hdslb.com/bfs/archive/cd1bc7991b67f4720e87bc1c2952d19dc018a9b6.jpg@672w_378h_1c_!web-home-common-cover.avif">
+        </picture>
+      </a>
+<!--      标题-->
+      <a style="font-weight: 500; line-height: 1.25;" target="_blank" [href]="item.link">{{item.title}}</a>
+    </div>
+    <div style="padding-top: 40px; align-items: center">
+<!--      up主-->
+      <a style="align-items: center; justify-content: flex-start;" [href]="item.owner_link" target="_blank">
+        <img src="assets/svgIcons/owner.svg" style="height: 16px; width: 16px;fill: #9499a0">
+        <span style="font-weight: 400;color: #9499a0; align-items: center; justify-content: flex-start;">{{item.owner}}</span>
+        <span style="margin-left:4px; font-weight: 400;color: #9499a0; align-items: center; justify-content: flex-start;"> · {{item.date}}</span>
+      </a>
+    </div>
   </div>
 </div>

@@ -21,6 +21,7 @@
     "@ng-bootstrap/ng-bootstrap": "^13.1.1",
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.2.0",
+    "hls.js": "^1.2.9",
     "ngx-infinite-scroll": "^14.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

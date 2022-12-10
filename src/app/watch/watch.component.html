@@ -1,9 +1,7 @@
-<div style="display: flex; flex-direction: column;">
+<div>
   <app-header></app-header>
-  <app-channel></app-channel>
-  <app-recommend></app-recommend>
+  <app-video [video_info]="video_info"></app-video>
   <ng-template [ngIf]="uiService.logreg_window">
     <app-logreg></app-logreg>
   </ng-template>
 </div>
-

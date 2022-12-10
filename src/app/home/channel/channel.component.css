@@ -1,13 +1,11 @@
 .bili-header_channel{
-  position: absolute;
-  top: 64px;
+  position: relative;
   margin: 0;
   padding: 0 60px;
   height: 110px;
   display: flex;
   align-items: center;
   background: #ffffff;
-  position: relative;
   width: 100%;
 }
 .channel-icons{
