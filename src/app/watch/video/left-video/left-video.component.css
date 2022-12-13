@@ -4,4 +4,24 @@
 }
 .video{
   width: 100%;
+  height: 446px;
+  position: relative;
+}
+.videoplayer{
+  min-width: 668px;
+  min-height: 376px;
+  width: 100%;
+  height: 100%;
+  /*object-fit: contain;*/
+  position: relative;
+  z-index: 1;
+}
+#canvas {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 80%;
+  z-index: 2;
+  background-color: #59ca73;
 }

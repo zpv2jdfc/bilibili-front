@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {Observable} from "rxjs";
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {catchError, Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import { InfoService } from './info.service';
 @Injectable({
@@ -24,5 +24,13 @@ export class VideoService {
         return {'msg':'ok','code':'10000'}
       }
     ));
+  }
+  getBiu(videoId:number, begin:number, end:number) : Observable<any>{
+    let params = new HttpParams();
+    params.set('videoId',videoId);
+    params.set('begin',begin);
+    params.set('end',end);
+    const options = {params:params};
+    return this.http.get(this.infoService.base_url+'/video/getbiu',options);
   }
 }

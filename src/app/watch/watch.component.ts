@@ -16,7 +16,8 @@ export class WatchComponent {
 
   bv_code = ''
   video_info = {
-
+    url : "http://1.116.112.80/src/video/test/test.m3u8",
+    duration: 9,
   }
 
   ngOnInit() {

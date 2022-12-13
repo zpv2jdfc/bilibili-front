@@ -1,4 +1,4 @@
-<div >
+<div style="justify-content: center;">
   <div class="title">
     <h1 style="line-height: 28px; font-size: 20px; font-weight: 500;margin-bottom: 6px;">{{video_info.title}}</h1>
     <div style="display: flex; flex-direction: column;font-size: 13px; height: 24px;line-height: 18px; position: relative;">
@@ -6,7 +6,7 @@
         <span style="color: #9499a0;line-height: 18px;font-size: 13px;margin-right: 12px">{{video_info.play_num}}</span>
       </div>
       <div>
-        <span style="color: #9499a0;line-height: 18px;font-size: 13px;margin-right: 12px">{{video_info.bullet_num}}</span>
+        <span style="color: #9499a0;line-height: 18px;font-size: 13px;margin-right: 12px">{{video_info.biu_num}}</span>
       </div>
       <div>
         <span style="color: #9499a0;line-height: 18px;font-size: 13px;margin-right: 12px">{{video_info.uptime}}</span>
@@ -16,12 +16,38 @@
       </div>
     </div>
   </div>
-  <div class="video">
-    <div class="page">
-      <video controls id="video" autoplay="autoplay">
-        <source type="video/mp4">
-      </video>
-      <button (click)="start()">播放</button>
+  <div style="width: 792px; height: 492px;justify-content: center; align-items: center;">
+    <div class="video" >
+      <div style="width: 100%; height: 446px; background-color: #000;position: relative;">
+        <canvas id="canvas" #canvas></canvas>
+        <video id="aaaa" #videop crossorigin="anonymous" controls  class="videoplayer">
+          <source type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <div style="width:100%; height: 46px; padding: 0 12px 0 12px; display: flex;align-items: center;user-select: none;">
+      <div style="width: 26%; height: 16px; display: flex; flex-direction: column;">
+          <span style="font-size: 13px; line-height: 16px; color: #61666d;">{{video_info.viewCount}} 人正在看，已装填 {{video_info.biuCount}} 条弹幕</span>
+      </div>
+      <div style="width: 73%; height: 32px; border-radius: 8px; display: flex; align-items: center; position: relative; background-color: #F1F2F3;">
+        <div style="width: 85%; border-radius: 8px; align-items: center; padding-left: 20px;">
+          <input style="width: 100%; line-height: 28px; color: #18191c;padding: 0 5px; border: none; outline: none; background-color: #f1f2f3;" placeholder="发个友善的弹幕见证当下">
+        </div>
+        <div style="height: 100%; width: 15%; border-radius: 0 8px 8px 0;line-height:30px;text-align:center;cursor: pointer; position: relative; right: 0; text-align: center;" (click)="biu()">
+          <div style="height: 100%; border-radius: 0 8px 8px 0; font-size: 13px; background-color:#00aeec; color: #fff; padding: 3px;text-align: center;">
+            <span>发送</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comment-container">
+    <div>
+      <span style="color: #18191c; font-weight: 500;font-size: 20px;">评论</span>
+      <span style="font-size: 13px; color: #9499a0; margin: 0 36px 0 6px;">{{video_info.commentCount}}</span>
+    </div>
+    <div class="replay-wrap">
+
     </div>
   </div>
 </div>
