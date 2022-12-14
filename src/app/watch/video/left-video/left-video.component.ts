@@ -3,6 +3,7 @@ import HLS from 'hls.js'
 import {Queue} from "src/app/common/queue";
 import {interval, Observable, take, timer} from 'rxjs';
 import { map, takeWhile, tap } from 'rxjs/operators';
+import {VideoService} from 'src/app/services/video.service'
 @Component({
   selector: 'app-left-video',
   templateUrl: './left-video.component.html',
@@ -27,15 +28,22 @@ export class LeftVideoComponent {
   canvas;
   ctx : any;
   biu_que : any;
+  biu_loaded : any;
   timer;
+  //当前视频播放到哪
   curtime : number = 0;
+  //是否可以向准备队列添加弹幕
+  //已经加载到哪个时间的弹幕
+  biu_end_time = 0;
+  push_loadded : boolean = true;
+  constructor(private videoService : VideoService) {
+  }
   ngOnInit(){
     this.hls = new HLS();
     this.hls.attachMedia(this.video.nativeElement);
     this.hls.loadSource(this.video_info.url);
     this.hls.on(HLS.Events.MANIFEST_PARSED, function() {
       this.video.pause();});
-    this.setBiu();
 
     //监听播放事件
     let _this = this;
@@ -54,6 +62,11 @@ export class LeftVideoComponent {
     console.log("开始播放")
     this.timer = interval(16);
     const sub = this.timer.subscribe(x => {
+      this.push_loadded = false;
+      while(!this.biu_loaded.isEmpty() && this.biu_loaded.peek().time<=this.video.nativeElement.currentTime){
+        this.biu_que.offer(this.biu_loaded.poll());
+      }
+      this.push_loadded = true;
       this.draw(x);
       if(this.video.nativeElement.paused)
         sub.unsubscribe();
@@ -68,9 +81,15 @@ export class LeftVideoComponent {
       console.log("拖动了进度条，重新加载弹幕")
       this.curtime = this.video.nativeElement.currentTime;
       this.biu_que.clear();
+      this.biu_loaded.clear();
       this.loadBiu(this.video_info.id,this.curtime,this.curtime+20);
+      this.biu_end_time = this.curtime+20;
     }else {
       this.curtime = this.video.nativeElement.currentTime;
+      if(this.curtime>this.biu_end_time-10){
+        this.loadBiu(this.video_info.id,this.biu_end_time,this.biu_end_time+20);
+        this.biu_end_time += 10;
+      }
     }
   }
 
@@ -79,7 +98,18 @@ export class LeftVideoComponent {
 
   }
   loadBiu(videoId:number,begin:number, end:number){
-
+    this.videoService.getBiu(videoId,begin,end).subscribe(data=>{
+      let biu_temp = new Queue();
+      for(var item of data){
+        item.x=792;
+        item.y=Math.floor(Math.random()*330);
+        item.speed=item.content.length/5
+        biu_temp.offer(item);
+      }
+      while(this.push_loadded==false){
+      }
+      this.biu_loaded = biu_temp;
+    })
   }
   setBiu(){
     let w = 792;
@@ -93,11 +123,14 @@ export class LeftVideoComponent {
     this.ctx.fillStyle = "#fff";
     this.ctx.scale(5,5);
     this.biu_que = new Queue<{}>();
+    this.biu_loaded = new Queue();
     //初始加载20s弹幕，位置从最右端开始
     this.biu_que.offer({x:792,y:100,content:'100',speed:1})
     this.biu_que.offer({x:792,y:200,content:'100',speed:1})
     this.biu_que.offer({x:792,y:200,content:'100',speed:1})
     this.biu_que.offer({x:792,y:200,content:'100',speed:1})
+    this.loadBiu(this.video_info.id,0,20);
+    this.biu_end_time = 20;
   }
   draw(x:number){
     this.ctx.clearRect(0,0,this.canvas.nativeElement.width,this.canvas.nativeElement.height);
