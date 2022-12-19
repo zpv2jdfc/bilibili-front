@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {catchError, Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import { InfoService } from './info.service';
@@ -26,11 +26,22 @@ export class VideoService {
     ));
   }
   getBiu(videoId:number, begin:number, end:number) : Observable<any>{
-    let params = new HttpParams();
-    params.set('videoId',videoId);
-    params.set('begin',begin);
-    params.set('end',end);
-    const options = {params:params};
-    return this.http.get(this.infoService.base_url+'/video/getbiu',options);
+    let data = {
+      videoId : videoId,
+      begin : Math.floor(begin),
+      end : Math.floor(end)
+    }
+    return this.http.get(this.infoService.base_url+'/video/getbiu', {params : data, observe : "body"});
+  }
+
+  biu(videoId : number, content : string, time : number) : Observable<any> {
+    const headers = {'Content-Type' : 'application/json;charset=UTF-8'};
+    // const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'});
+    const data = {
+      videoId : videoId,
+      content : content,
+      time : time
+    }
+    return this.http.post(this.infoService.base_url+'/video/biu',JSON.stringify(data),{headers : headers});
   }
 }

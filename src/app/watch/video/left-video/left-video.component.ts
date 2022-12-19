@@ -36,15 +36,17 @@ export class LeftVideoComponent {
   //已经加载到哪个时间的弹幕
   biu_end_time = 0;
   push_loadded : boolean = true;
+  biu_content : string
   constructor(private videoService : VideoService) {
   }
   ngOnInit(){
+    this.video_info.id = 0;
     this.hls = new HLS();
     this.hls.attachMedia(this.video.nativeElement);
     this.hls.loadSource(this.video_info.url);
     this.hls.on(HLS.Events.MANIFEST_PARSED, function() {
       this.video.pause();});
-
+    this.setBiu();
     //监听播放事件
     let _this = this;
     this.video.nativeElement.addEventListener("play",function (){
@@ -95,15 +97,20 @@ export class LeftVideoComponent {
 
   //发送弹幕
   biu(){
-
+    console.log(this.biu_content)
+    this.videoService.biu(this.video_info.id, this.biu_content, this.video.nativeElement.currentTime).subscribe(data=>{
+      console.log(data)
+    });
   }
   loadBiu(videoId:number,begin:number, end:number){
     this.videoService.getBiu(videoId,begin,end).subscribe(data=>{
       let biu_temp = new Queue();
-      for(var item of data){
+      for(var item of data.data){
+        item.time = item.biu_time;
         item.x=792;
         item.y=Math.floor(Math.random()*330);
         item.speed=item.content.length/5
+        delete item.biu_time;
         biu_temp.offer(item);
       }
       while(this.push_loadded==false){
