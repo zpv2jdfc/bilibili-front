@@ -1,0 +1,27 @@
+.owner{
+  width: 100%;
+  height: 100px;
+  padding-bottom: 20px;
+  display: flex;
+}
+.left-avatar{
+  width: 48px;
+  height: 48px;
+}
+.right-intro{
+  margin-left: 12px;
+  height: 80px;
+}
+.recommend-card{
+  width: 100%;
+  height: 81px;
+  margin-bottom: 12px;
+  display: flex;
+}
+.left-preview{
+  width: 140px;
+  height: 80px;
+}
+.right-video-intro{
+  margin-left: 10px;
+}
