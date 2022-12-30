@@ -37,6 +37,8 @@ export class LeftVideoComponent {
   biu_end_time = 0;
   push_loadded : boolean = true;
   biu_content : string
+  // show info
+  like_num_show : string
   constructor(private videoService : VideoService) {
   }
   ngOnInit(){
@@ -47,6 +49,11 @@ export class LeftVideoComponent {
     this.hls.on(HLS.Events.MANIFEST_PARSED, function() {
       this.video.pause();});
     this.setBiu();
+    //init variable
+    this.like_num_show = this.video_info.like_num
+    if(this.video_info.like_num>=10000){
+      this.like_num_show = (this.video_info.like_num/10000).toFixed(1) + '万'
+    }
     //监听播放事件
     let _this = this;
     this.video.nativeElement.addEventListener("play",function (){

@@ -1,15 +1,22 @@
 <div style="justify-content: center;">
   <div class="title">
     <h1 style="line-height: 28px; font-size: 20px; font-weight: 500;margin-bottom: 6px;">{{video_info.title}}</h1>
-    <div style="display: flex; flex-direction: column;font-size: 13px; height: 24px;line-height: 18px; position: relative;">
+    <div style="display: flex; font-size: 13px; height: 24px;line-height: 18px; position: relative;">
       <div>
-        <span style="color: #9499a0;line-height: 18px;font-size: 13px;margin-right: 12px">{{video_info.play_num}}</span>
+        <span style="color: #9499a0;line-height: 18px;font-size: 13px;margin-right: 12px">
+          <img src="https://s1.hdslb.com/bfs/static/jinkela/video/asserts/view.svg">
+          {{video_info.play_num}}</span>
       </div>
       <div>
-        <span style="color: #9499a0;line-height: 18px;font-size: 13px;margin-right: 12px">{{video_info.biu_num}}</span>
+        <span style="color: #9499a0;line-height: 18px;font-size: 13px;margin-right: 12px">
+          <img src="https://s1.hdslb.com/bfs/static/jinkela/video/asserts/dm.svg">
+          {{video_info.biu_num}}</span>
       </div>
       <div>
-        <span style="color: #9499a0;line-height: 18px;font-size: 13px;margin-right: 12px">{{video_info.uptime}}</span>
+        <span style="color: #9499a0;line-height: 18px;font-size: 13px;margin-right: 12px">
+          <img style="width: 20px; height: 20px;"
+            src="data:image/svg+xml;base64,PHN2ZyB0PSIxNjQyNTg4MTEzODk5IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjY4MjciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PGRlZnM+PC9kZWZzPjxwYXRoIGQ9Ik0xNjcuMDI0IDUxMmEzNDQuOTc2IDM0NC45NzYgMCAxIDEgNjg5Ljk1MiAwIDM0NC45NzYgMzQ0Ljk3NiAwIDAgMS02OTAgMHpNNTEyIDEwNi45NzZhNDA1LjAyNCA0MDUuMDI0IDAgMSAwIDAgODEwLjA0OCA0MDUuMDI0IDQwNS4wMjQgMCAwIDAgMC04MTB6IG0zMCAyMzUuMDA4YTMwIDMwIDAgMSAwLTYwIDBWNTEyYzAgNy45NjggMy4xNjggMTUuNiA4Ljc4NCAyMS4yMTZsMTIwIDEyMGEzMCAzMCAwIDEgMCA0Mi40MzItNDIuNDMyTDU0MiA0OTkuNTJWMzQxLjk4NHoiIGZpbGw9IiM5NDk5QTAiIHAtaWQ9IjY4MjgiPjwvcGF0aD48L3N2Zz4=">
+          {{video_info.uptime}}</span>
       </div>
       <div>
         <span style="color: #9499a0;line-height: 18px;font-size: 13px;margin-right: 12px">未经作者授权，禁止转载</span>
@@ -41,13 +48,44 @@
       </div>
     </div>
   </div>
+  <div class="bottom-toolbar">
+    <div class="toolbar-left" style="display: flex;">
+      <span>
+        <app-svg-like></app-svg-like>
+        {{like_num_show}}
+      </span>
+
+    </div>
+  </div>
+  <div style="height: 1px;width: 100%;background: #e3e5e7;"></div>
+  <div style="height: 24px;line-height: 24px;margin: 16px 0; height: 30px;font-size: 15px;">
+    <span>{{video_info.intro}}</span>
+  </div>
+  <div style="display: flex;">
+    <div class="tag" *ngFor="let tag of video_info.tags; index as i">
+      <span>{{tag}}</span>
+    </div>
+  </div>
+  <div style="height: 1px;width: 100%;background: #e3e5e7;"></div>
+  <div class="bottom-ad"></div>
   <div class="comment-container">
-    <div>
+    <div class="replay-header">
       <span style="color: #18191c; font-weight: 500;font-size: 20px;">评论</span>
-      <span style="font-size: 13px; color: #9499a0; margin: 0 36px 0 6px;">{{video_info.commentCount}}</span>
+      <span style="font-size: 13px; color: #9499a0; margin: 0 36px 0 6px;">{{video_info.comment_num}}</span>
     </div>
     <div class="replay-wrap">
-
+      <div class="main-replay-box" style="display: flex; height:50px;">
+<!--        头像-->
+        <div style="width: 80px; height: 50px; display: flex; align-items: center; justify-content: center;"></div>
+<!--        输入评论-->
+        <div style="width: 100%;height: 100%">
+          <textarea placeholder="发一条友善的评论" style="width: 100%;height: 100%; border: 1px solid #f1f2f3; border-radius: 6px; background-color: #f1f2f3; line-height: 38px;color: #18191c;outline: none;"></textarea>
+        </div>
+<!--        发布-->
+        <div style="width: 70px;height: 100%; margin-left: 10px;background-color: #1890ff;align-items: center;justify-content: center;display: flex; border-radius: 4px;">
+          <span style="font-size: 16px; color: #ffffff;font-weight: 400;user-select: none;text-align: center;">发布</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

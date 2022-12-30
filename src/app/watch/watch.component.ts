@@ -18,6 +18,14 @@ export class WatchComponent {
   video_info = {
     url : "http://1.116.112.80/src/video/test/test.m3u8",
     duration: 9,
+    like_num: 10000,
+    play_num: 1000,
+    biu_num: 200,
+    comment_num: 51,
+    uptime: "2022-12-30 18:51:23",
+    title: '火影忍者',
+    tags: ['动漫','搞笑','热血'],
+    intro: '哈哈哈哈哈哈哈哈，不是孤勇者，但是别失望'
   }
 
   ngOnInit() {

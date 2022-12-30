@@ -25,3 +25,36 @@
   z-index: 2;
   background-color: #59ca73;
 }
+.bottom-toolbar{
+  height: 64px;
+  align-items: center;
+  padding: 16px 0 20px 0;
+}
+.bottom-toolbar .toolbar-left span:hover{
+  fill: #00aeec;
+  color: #00aeec;
+}
+.bottom-toolbar .toolbar-left span{
+  cursor: pointer;
+  fill: #61666d;
+  color: #61666d;
+  font-weight: 500;
+  line-height: 28px;
+}
+.tag{
+  background-color: #f1f2f3;
+  border-radius: 15px;
+  margin: 0 12px 8px 0;
+  position: relative;
+  cursor: pointer;
+  font-size: 13px;
+  width: 50px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+}
+.bottom-ad{
+  margin: 24px 0;
+  height: 102px;
+  background-color: #59ca73;
+}

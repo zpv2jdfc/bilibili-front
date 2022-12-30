@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 
+import {IconModule} from './icon/icon.module'
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +39,7 @@ import { RightRecommendComponent } from './watch/video/right-recommend/right-rec
     HttpClientModule,
     InfiniteScrollModule,
     NgbModule,
+    IconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
