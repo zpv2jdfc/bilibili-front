@@ -39,6 +39,7 @@ export class LeftVideoComponent {
   biu_content : string
   // show info
   like_num_show : string
+  comment_list : any
   constructor(private videoService : VideoService) {
   }
   ngOnInit(){
@@ -54,6 +55,11 @@ export class LeftVideoComponent {
     if(this.video_info.like_num>=10000){
       this.like_num_show = (this.video_info.like_num/10000).toFixed(1) + '万'
     }
+    //加载评论
+    this.videoService.loadComment(this.video_info.id).subscribe((data:string) => {
+      this.comment_list = JSON.parse(data)
+    })
+
     //监听播放事件
     let _this = this;
     this.video.nativeElement.addEventListener("play",function (){

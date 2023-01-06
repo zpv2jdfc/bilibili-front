@@ -10,6 +10,12 @@ export class VideoService {
 
   constructor(private http: HttpClient, private infoService : InfoService) { }
 
+  loadComment(videoId : number){
+    let data = {
+      videoId : videoId,
+    }
+    return this.http.get(this.infoService.base_url+'/video/getbiu',{params : data});
+  }
   searchByBVCode(code:string):Observable<any>{
     var regInfo = {
       BVCode: code,

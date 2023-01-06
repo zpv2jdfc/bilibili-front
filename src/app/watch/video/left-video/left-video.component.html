@@ -73,7 +73,7 @@
       <span style="color: #18191c; font-weight: 500;font-size: 20px;">评论</span>
       <span style="font-size: 13px; color: #9499a0; margin: 0 36px 0 6px;">{{video_info.comment_num}}</span>
     </div>
-    <div class="replay-wrap">
+    <div class="replay-wrap" style="padding-bottom: 100px;">
       <div class="main-replay-box" style="display: flex; height:50px;">
 <!--        头像-->
         <div style="width: 80px; height: 50px; display: flex; align-items: center; justify-content: center;"></div>
@@ -84,6 +84,33 @@
 <!--        发布-->
         <div style="width: 70px;height: 100%; margin-left: 10px;background-color: #1890ff;align-items: center;justify-content: center;display: flex; border-radius: 4px;">
           <span style="font-size: 16px; color: #ffffff;font-weight: 400;user-select: none;text-align: center;">发布</span>
+        </div>
+      </div>
+      <div class="replay-list">
+        <div class="reply-item" *ngFor="let item of comment_list; index as i">
+          <div class="root-reply-container">
+            <div class="root-reply-avatar" style="display: flex; justify-content: center; position:absolute; width: 80px; cursor: pointer;"></div>
+            <div class="content-wrap">
+              <div class="user-info">
+                <a [href]=item.user.url>item.user.name</a>
+              </div>
+              <div class="root-reply">
+                {{item.content}}
+              </div>
+            </div>
+          </div>
+          <div class="sub-reply-container">
+            <div class="sub-reply-item" *ngFOr="let sub_item of item.sub">
+              <div class="sub-userinfo">
+                <a [href]="sub_item.user.url">{{sub_item.user.name}}</a>
+              </div>
+              <span>{{sub_item.content}}</span>
+              <div class="sub-reply-info">
+                <span>{{sub_item.time}}</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin: 14px 0 0 80px; border-bottom: 1px solid #e3e5e7;"></div>
         </div>
       </div>
     </div>

@@ -58,3 +58,13 @@
   height: 102px;
   background-color: #59ca73;
 }
+.reply-item{
+  margin-top: 14px;
+  padding-bottom: 100px;
+  background-color: #ffffff;
+}
+.root-reply-container{
+  padding: 22px 0 0 80px;
+  position: relative;
+  display: flex;
+}
