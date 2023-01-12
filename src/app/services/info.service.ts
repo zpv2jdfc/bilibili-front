@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class InfoService {
   base_url = '/api'
+  src_url = 'http://www.v-ming.com/src'
   log_state = false
   token = ''
 

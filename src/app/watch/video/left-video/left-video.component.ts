@@ -40,10 +40,10 @@ export class LeftVideoComponent {
   // show info
   like_num_show : string
   comment_list : any
+  comment_content : any
   constructor(private videoService : VideoService) {
   }
   ngOnInit(){
-    this.video_info.id = 0;
     this.hls = new HLS();
     this.hls.attachMedia(this.video.nativeElement);
     this.hls.loadSource(this.video_info.url);
@@ -56,8 +56,8 @@ export class LeftVideoComponent {
       this.like_num_show = (this.video_info.like_num/10000).toFixed(1) + '万'
     }
     //加载评论
-    this.videoService.loadComment(this.video_info.id).subscribe((data:string) => {
-      this.comment_list = JSON.parse(data)
+    this.videoService.loadComment(this.video_info.id).subscribe((data: any) => {
+      this.comment_list = data.data
     })
 
     //监听播放事件
@@ -166,7 +166,14 @@ export class LeftVideoComponent {
       }
     }
   }
-
+// 发送评论
+  send_comment(){
+    this.videoService.sendComment(this.video_info.id, this.comment_content).subscribe(
+      (data )=>{
+        console.log(data);
+      }
+    )
+  }
 
 }
 

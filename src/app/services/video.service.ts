@@ -9,27 +9,22 @@ import { InfoService } from './info.service';
 export class VideoService {
 
   constructor(private http: HttpClient, private infoService : InfoService) { }
-
+  sendComment(videoId : number, content : string){
+    let data = {
+      videoId : videoId,
+      content : content,
+      dateTime : new Date()
+    }
+    return this.http.post(this.infoService.base_url+'/video/addComment',data,{observe : "response"});
+  }
   loadComment(videoId : number){
     let data = {
       videoId : videoId,
     }
-    return this.http.get(this.infoService.base_url+'/video/getbiu',{params : data});
+    return this.http.get(this.infoService.base_url+'/video/getComment',{params : data});
   }
   searchByBVCode(code:string):Observable<any>{
-    var regInfo = {
-      BVCode: code,
-    }
-    let res = null
-    return this.http.post<any>(this.infoService.base_url+'/video/search', regInfo, {observe: 'response'}).pipe(map(
-      (response:any) =>{
-        let body = response.body
-        if(body.code!='10000'){
-          return body
-        }
-        return {'msg':'ok','code':'10000'}
-      }
-    ));
+    return this.http.get<any>(this.infoService.base_url+'/video/watch/'+code);
   }
   getBiu(videoId:number, begin:number, end:number) : Observable<any>{
     let data = {

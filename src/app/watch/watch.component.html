@@ -1,6 +1,6 @@
 <div>
   <app-header></app-header>
-  <app-video [video_info]="video_info"></app-video>
+  <app-video *ngIf="video_info | async as finalInfo"  [video_info]="finalInfo"></app-video>
   <ng-template [ngIf]="uiService.logreg_window">
     <app-logreg></app-logreg>
   </ng-template>

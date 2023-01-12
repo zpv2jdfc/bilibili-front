@@ -79,34 +79,35 @@
         <div style="width: 80px; height: 50px; display: flex; align-items: center; justify-content: center;"></div>
 <!--        输入评论-->
         <div style="width: 100%;height: 100%">
-          <textarea placeholder="发一条友善的评论" style="width: 100%;height: 100%; border: 1px solid #f1f2f3; border-radius: 6px; background-color: #f1f2f3; line-height: 38px;color: #18191c;outline: none;"></textarea>
+          <textarea [(ngModel)]="comment_content" placeholder="发一条友善的评论" style="width: 100%;height: 100%; border: 1px solid #f1f2f3; border-radius: 6px; background-color: #f1f2f3; line-height: 38px;color: #18191c;outline: none;"></textarea>
         </div>
 <!--        发布-->
-        <div style="width: 70px;height: 100%; margin-left: 10px;background-color: #1890ff;align-items: center;justify-content: center;display: flex; border-radius: 4px;">
+        <div (click)="send_comment()" style="cursor: pointer; width: 70px;height: 100%; margin-left: 10px;background-color: #1890ff;align-items: center;justify-content: center;display: flex; border-radius: 4px;">
           <span style="font-size: 16px; color: #ffffff;font-weight: 400;user-select: none;text-align: center;">发布</span>
         </div>
       </div>
+<!--      评论区-->
       <div class="replay-list">
         <div class="reply-item" *ngFor="let item of comment_list; index as i">
           <div class="root-reply-container">
             <div class="root-reply-avatar" style="display: flex; justify-content: center; position:absolute; width: 80px; cursor: pointer;"></div>
             <div class="content-wrap">
               <div class="user-info">
-                <a [href]=item.user.url>item.user.name</a>
+                <a [href]=item.user.url>{{item.user.name}}</a>
               </div>
               <div class="root-reply">
-                {{item.content}}
+                {{item.comment}}
               </div>
             </div>
           </div>
           <div class="sub-reply-container">
-            <div class="sub-reply-item" *ngFOr="let sub_item of item.sub">
+            <div class="sub-reply-item" *ngFor="let sub_item of item.subComment">
               <div class="sub-userinfo">
                 <a [href]="sub_item.user.url">{{sub_item.user.name}}</a>
               </div>
-              <span>{{sub_item.content}}</span>
+              <span>{{sub_item.comment}}</span>
               <div class="sub-reply-info">
-                <span>{{sub_item.time}}</span>
+                <span>{{sub_item.commentTime}}</span>
               </div>
             </div>
           </div>

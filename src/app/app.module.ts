@@ -18,6 +18,7 @@ import { WatchComponent } from './watch/watch.component';
 import { VideoComponent } from './watch/video/video.component';
 import { LeftVideoComponent } from './watch/video/left-video/left-video.component';
 import { RightRecommendComponent } from './watch/video/right-recommend/right-recommend.component';
+import { NotFoundComponent } from './error/not-found/not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,8 @@ import { RightRecommendComponent } from './watch/video/right-recommend/right-rec
     WatchComponent,
     VideoComponent,
     LeftVideoComponent,
-    RightRecommendComponent
+    RightRecommendComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
