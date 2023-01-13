@@ -17,6 +17,16 @@ export class VideoService {
     }
     return this.http.post(this.infoService.base_url+'/video/addComment',data,{observe : "response"});
   }
+  sendSubComment(videoId : number, parentId : number, replyId : number, content : string){
+    let data = {
+      videoId : videoId,
+      content : content,
+      parentId : parentId,
+      replyId : replyId,
+      dateTime : new Date()
+    }
+    return this.http.post(this.infoService.base_url+'/video/addSubComment',data,{observe : "response"});
+  }
   loadComment(videoId : number){
     let data = {
       videoId : videoId,

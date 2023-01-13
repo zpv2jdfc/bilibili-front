@@ -5,18 +5,18 @@
       <div>
         <span style="color: #9499a0;line-height: 18px;font-size: 13px;margin-right: 12px">
           <img src="https://s1.hdslb.com/bfs/static/jinkela/video/asserts/view.svg">
-          {{video_info.play_num}}</span>
+          {{video_info.playNum}}</span>
       </div>
       <div>
         <span style="color: #9499a0;line-height: 18px;font-size: 13px;margin-right: 12px">
           <img src="https://s1.hdslb.com/bfs/static/jinkela/video/asserts/dm.svg">
-          {{video_info.biu_num}}</span>
+          {{video_info.biuNum}}</span>
       </div>
       <div>
         <span style="color: #9499a0;line-height: 18px;font-size: 13px;margin-right: 12px">
           <img style="width: 20px; height: 20px;"
             src="data:image/svg+xml;base64,PHN2ZyB0PSIxNjQyNTg4MTEzODk5IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjY4MjciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PGRlZnM+PC9kZWZzPjxwYXRoIGQ9Ik0xNjcuMDI0IDUxMmEzNDQuOTc2IDM0NC45NzYgMCAxIDEgNjg5Ljk1MiAwIDM0NC45NzYgMzQ0Ljk3NiAwIDAgMS02OTAgMHpNNTEyIDEwNi45NzZhNDA1LjAyNCA0MDUuMDI0IDAgMSAwIDAgODEwLjA0OCA0MDUuMDI0IDQwNS4wMjQgMCAwIDAgMC04MTB6IG0zMCAyMzUuMDA4YTMwIDMwIDAgMSAwLTYwIDBWNTEyYzAgNy45NjggMy4xNjggMTUuNiA4Ljc4NCAyMS4yMTZsMTIwIDEyMGEzMCAzMCAwIDEgMCA0Mi40MzItNDIuNDMyTDU0MiA0OTkuNTJWMzQxLjk4NHoiIGZpbGw9IiM5NDk5QTAiIHAtaWQ9IjY4MjgiPjwvcGF0aD48L3N2Zz4=">
-          {{video_info.uptime}}</span>
+          {{video_info.upTime}}</span>
       </div>
       <div>
         <span style="color: #9499a0;line-height: 18px;font-size: 13px;margin-right: 12px">未经作者授权，禁止转载</span>
@@ -76,10 +76,12 @@
     <div class="replay-wrap" style="padding-bottom: 100px;">
       <div class="main-replay-box" style="display: flex; height:50px;">
 <!--        头像-->
-        <div style="width: 80px; height: 50px; display: flex; align-items: center; justify-content: center;"></div>
+        <div style="width: 80px; height: 50px; display: flex; align-items: center; justify-content: center;">
+          <img [src]=infoService.info.avatar style="width: 40px;height: 40px;">
+        </div>
 <!--        输入评论-->
         <div style="width: 100%;height: 100%">
-          <textarea [(ngModel)]="comment_content" placeholder="发一条友善的评论" style="width: 100%;height: 100%; border: 1px solid #f1f2f3; border-radius: 6px; background-color: #f1f2f3; line-height: 38px;color: #18191c;outline: none;"></textarea>
+          <textarea class="comment-input-area" [(ngModel)]="comment_content" placeholder="发一条友善的评论"></textarea>
         </div>
 <!--        发布-->
         <div (click)="send_comment()" style="cursor: pointer; width: 70px;height: 100%; margin-left: 10px;background-color: #1890ff;align-items: center;justify-content: center;display: flex; border-radius: 4px;">
@@ -90,24 +92,60 @@
       <div class="replay-list">
         <div class="reply-item" *ngFor="let item of comment_list; index as i">
           <div class="root-reply-container">
-            <div class="root-reply-avatar" style="display: flex; justify-content: center; position:absolute; width: 80px; cursor: pointer;"></div>
+            <div class="root-reply-avatar" style="display: flex; justify-content: center; position:absolute; width: 80px; cursor: pointer;">
+              <div class="avatar">
+                <img [src]=item.user.avatar style="width: 40px;height: 40px;">
+              </div>
+            </div>
             <div class="content-wrap">
-              <div class="user-info">
+              <div class="user-info" style="height: 30px;margin-bottom: 4px; align-items: center;">
                 <a [href]=item.user.url>{{item.user.name}}</a>
               </div>
               <div class="root-reply">
                 {{item.comment}}
               </div>
+              <div class="reply-info" style="display: flex;position: relative;margin-top: 2px;color: #9499a0;font-size: 13px;align-items: center;">
+                <span style="margin-right: 20px;">{{item.commentTime}}</span>
+                <span style="margin-right: 20px;display: flex;align-items: center;">
+                  <span class="support-icon" style="width: 18px;height: 18px;margin-right: 10px;color: #9499a0;cursor: pointer; fill: #9499a0;">
+                    <app-svg-support></app-svg-support>
+                  </span>
+                  <span>{{item.likeNum}}</span>
+                </span>
+                <span class="reply-btn" style="cursor: pointer;" (click)="reply(item)">回复</span>
+              </div>
             </div>
           </div>
-          <div class="sub-reply-container">
-            <div class="sub-reply-item" *ngFor="let sub_item of item.subComment">
-              <div class="sub-userinfo">
+          <div class="sub-reply-container" style="padding-left: 72px;">
+            <div class="sub-reply-item" *ngFor="let sub_item of item.subComment" style="padding: 8px 0 8px 42px; position: relative; ">
+              <div class="sub-userinfo" style="display: inline-flex;margin-right: 9px;color: #61666d;">
+                <div style="position: absolute; left: 8px; cursor: pointer;">
+                  <img style="width: 24px; height: 24px;" [src]="sub_item.user.avatar">
+                </div>
                 <a [href]="sub_item.user.url">{{sub_item.user.name}}</a>
               </div>
+              <div style="display: inline-flex" *ngIf="sub_item.replyTo!=item.user.id">回复 </div>
               <span>{{sub_item.comment}}</span>
-              <div class="sub-reply-info">
-                <span>{{sub_item.commentTime}}</span>
+              <div class="sub-reply-info" style="color: #9499a0;margin-top: 2px;">
+                <span style="margin-right: 20px;">{{sub_item.commentTime}}</span>
+                <span class="support-icon" style="width: 18px;height: 18px;margin-right: 10px;color: #9499a0;cursor: pointer; fill: #9499a0;align-items: center;">
+                    <app-svg-support></app-svg-support>
+                </span>
+                <span style="margin-right: 20px;">{{sub_item.likeNum}}</span>
+                <span class="reply-btn" style="cursor: pointer;" (click)="sub_reply(item, sub_item)">回复</span>
+              </div>
+            </div>
+          </div>
+          <div class="reply-box-container" *ngIf="item.commentState">
+            <div class="reply-box" style="display: flex;height: 50px;">
+              <div style="height: 50px;width: 80px;justify-content: center; align-items: center;">
+                <div style="width: 40px;height: 40px;"><img style="width: 100%;height: 100%;" [src]="infoService.info.avatar"></div>
+              </div>
+              <div style="position: relative; width: 100%;height:100%;">
+                <textarea class="comment-reply-area"  [placeholder]=reply_placeholder [(ngModel)]="reply_content" ></textarea>
+              </div>
+              <div style="height: 100%;width: 75px; margin-left: 10px; border-radius: 4px; display: flex; justify-content: center; align-items: center;cursor: pointer; background-color: #1890ff" (click)="send_reply()">
+                <div style="font-size: 16px; color: #ffffff;user-select: none;" >发布</div>
               </div>
             </div>
           </div>

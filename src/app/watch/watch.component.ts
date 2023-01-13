@@ -37,7 +37,6 @@ export class WatchComponent {
     }else {
 
     }
-    console.log(location.pathname)
     this.route.paramMap.subscribe(param=>{
       this.bv_code = param.get("code");
     });

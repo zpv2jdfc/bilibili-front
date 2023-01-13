@@ -6,6 +6,9 @@ import { Injectable } from '@angular/core';
 export class InfoService {
   base_url = '/api'
   src_url = 'http://www.v-ming.com/src'
+  profile_url = "http://www.v-ming.com/profile"
+  domain_url = "http://www.v-ming.com"
+
   log_state = false
   token = ''
 
@@ -13,7 +16,7 @@ export class InfoService {
     id: '',
     name:'',
     signature:'',
-    avatar:'',
+    avatar:this.domain_url+'/avatar/unlog.jpg',
     level:'',
     privilege:'',
     status:'',
@@ -29,6 +32,7 @@ export class InfoService {
     }
   }
   setLocal(info:any, token:string){
+    info.avatar = this.domain_url + info.avatar;
     localStorage.setItem('info', JSON.stringify(info));
     localStorage.setItem('token', token);
   }
@@ -37,7 +41,7 @@ export class InfoService {
       id: '',
       name:'',
       signature:'',
-      avatar:'',
+      avatar:this.domain_url+'/avatar/unlog.jpg',
       level:'',
       privilege:'',
       status:'',

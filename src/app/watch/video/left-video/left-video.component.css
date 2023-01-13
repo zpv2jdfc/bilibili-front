@@ -60,11 +60,53 @@
 }
 .reply-item{
   margin-top: 14px;
-  padding-bottom: 100px;
+  /*padding-bottom: 100px;*/
   background-color: #ffffff;
 }
 .root-reply-container{
   padding: 22px 0 0 80px;
   position: relative;
   display: flex;
+}
+.root-reply-avatar{
+  position: absolute;
+  justify-content: center;
+  width: 80px;
+  cursor: pointer;
+  left: 0;
+}
+.reply-btn:hover{
+  color: #00aeec;
+}
+.support-icon :hover{
+  fill: #00aeec;
+}
+.reply-box-container{
+  padding: 25px 0 10px 80px;
+}
+.comment-reply-area{
+  border-color: #c9ccd0;
+  outline: none;
+  resize: none;
+  line-height: 38px;
+  border: 1px solid #f1f2f3;
+  padding: 5px 10px;
+  width:100%;
+  height: 100%;
+  border-radius: 6px;
+  background-color: #f1f2f3;
+}
+.comment-input-area{
+  width: 100%;
+  height: 100%;
+  border: 1px solid #f1f2f3;
+  border-radius: 6px;
+  background-color: #f1f2f3;
+  line-height: 38px;
+  color: #18191c;
+  outline: none;
+  resize: none;
+}
+.comment-reply-area:hover,.comment-reply-area:focus,.comment-input-area:hover,.comment-input-area:focus{
+  background-color: #ffffff;
 }

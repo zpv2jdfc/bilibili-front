@@ -4,6 +4,7 @@ import {Queue} from "src/app/common/queue";
 import {interval, Observable, take, timer} from 'rxjs';
 import { map, takeWhile, tap } from 'rxjs/operators';
 import {VideoService} from 'src/app/services/video.service'
+import {InfoService} from "../../../services/info.service";
 @Component({
   selector: 'app-left-video',
   templateUrl: './left-video.component.html',
@@ -39,9 +40,20 @@ export class LeftVideoComponent {
   biu_content : string
   // show info
   like_num_show : string
+  // 评论列表
   comment_list : any
+  // 评论输入框
   comment_content : any
-  constructor(private videoService : VideoService) {
+  // 回复输入框
+  reply_content : string = ''
+  // 回复 placeholder， 回复 @XXX:
+  reply_placeholder : string = ''
+  // 回复根对象
+  current_root_obj : any;
+  // 当前要回复的对象
+  current_reply_obj : any
+  constructor(private videoService : VideoService,
+              public infoService : InfoService) {
   }
   ngOnInit(){
     this.hls = new HLS();
@@ -51,15 +63,21 @@ export class LeftVideoComponent {
       this.video.pause();});
     this.setBiu();
     //init variable
-    this.like_num_show = this.video_info.like_num
-    if(this.video_info.like_num>=10000){
-      this.like_num_show = (this.video_info.like_num/10000).toFixed(1) + '万'
+    this.like_num_show = this.video_info.likeNum
+    if(this.video_info.likeNum>=10000){
+      this.like_num_show = (this.video_info.likeNum/10000).toFixed(1) + '万'
     }
     //加载评论
     this.videoService.loadComment(this.video_info.id).subscribe((data: any) => {
       this.comment_list = data.data
+      for(let item of this.comment_list){
+        item.user.avatar = this.infoService.domain_url + item.user.avatar;
+        for(let subItem of item.subComment){
+          subItem.user.avatar = this.infoService.domain_url + subItem.user.avatar;
+        }
+        item['commentState'] = false;
+      }
     })
-
     //监听播放事件
     let _this = this;
     this.video.nativeElement.addEventListener("play",function (){
@@ -174,7 +192,47 @@ export class LeftVideoComponent {
       }
     )
   }
+  reply(item : any){
+    let state = ~item.commentState;
+    for(let temp of this.comment_list){
+      temp.commentState = false;
+    }
+    this.reply_content = ''
+    this.reply_placeholder = '回复 @'+item.user.name+':'
+    item.commentState = state;
+    if(state){
+      this.current_root_obj = item;
+      this.current_reply_obj = item;
+    }else {
+      this.current_root_obj = null;
+      this.current_reply_obj = null;
+    }
+  }
+  sub_reply(item : any, sub_item : any){
+    let state = ~item.commentState;
+    for(let temp of this.comment_list){
+      temp.commentState = false;
+    }
+    this.reply_content = ''
+    this.reply_placeholder = '回复 @'+sub_item.user.name+':'
+    item.commentState = state;
+    if(state){
+      this.current_root_obj = item;
+      this.current_reply_obj = sub_item;
+    }else {
+      this.current_root_obj = null;
+      this.current_reply_obj = null;
+    }
+  }
+  send_reply(){
+    if(this.current_reply_obj==null)
+      return;
+    this.videoService.sendSubComment(this.video_info.id, this.current_root_obj.id, this.current_reply_obj.user.id, this.reply_content).subscribe(
+      (data)=>{
 
+      }
+    )
+  }
 }
 
 
