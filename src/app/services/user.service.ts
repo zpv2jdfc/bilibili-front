@@ -55,5 +55,7 @@ export class UserService {
   clearLocal(){
     this.infoService.clear();
   }
-
+  test():any{
+    return this.http.post<any>('http://v-ming.com:17953/login?email=admin@demo.com&password=123456',{},{});
+  }
 }

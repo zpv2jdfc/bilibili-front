@@ -227,7 +227,8 @@ export class LeftVideoComponent {
   send_reply(){
     if(this.current_reply_obj==null)
       return;
-    this.videoService.sendSubComment(this.video_info.id, this.current_root_obj.id, this.current_reply_obj.user.id, this.reply_content).subscribe(
+    this.videoService.sendSubComment(this.video_info.id, this.current_root_obj.id, this.current_reply_obj.user.id,
+      this.current_reply_obj.user.name, this.current_reply_obj.user.url, this.reply_content).subscribe(
       (data)=>{
 
       }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class InfoService {
 
   log_state = false
   token = ''
-
+  headers = new HttpHeaders();
   info = {
     id: '',
     name:'',
@@ -29,6 +30,7 @@ export class InfoService {
       this.token = temp1;
       this.info = JSON.parse(temp2)
       this.log_state = true;
+      this.headers.append('token', temp1)
     }
   }
   setLocal(info:any, token:string){
@@ -50,5 +52,6 @@ export class InfoService {
     localStorage.removeItem('token')
     localStorage.removeItem('info')
     this.log_state = false
+    this.headers = new HttpHeaders();
   }
 }

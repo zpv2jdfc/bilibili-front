@@ -124,7 +124,13 @@
                 </div>
                 <a [href]="sub_item.user.url">{{sub_item.user.name}}</a>
               </div>
-              <div style="display: inline-flex" *ngIf="sub_item.replyTo!=item.user.id">回复 </div>
+              <div style="display: inline-flex" *ngIf="sub_item.replyTo!=item.user.id">
+                &ensp;回复&ensp;
+                <span style="color: #00AEEC">
+                @<a [href]="sub_item.user.url">{{sub_item.user.name}}</a>
+                </span>
+                <span>:&ensp;</span>
+              </div>
               <span>{{sub_item.comment}}</span>
               <div class="sub-reply-info" style="color: #9499a0;margin-top: 2px;">
                 <span style="margin-right: 20px;">{{sub_item.commentTime}}</span>

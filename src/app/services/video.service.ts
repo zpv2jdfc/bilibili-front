@@ -17,7 +17,7 @@ export class VideoService {
     }
     return this.http.post(this.infoService.base_url+'/video/addComment',data,{observe : "response"});
   }
-  sendSubComment(videoId : number, parentId : number, replyId : number, content : string){
+  sendSubComment(videoId : number, parentId : number, replyId : number, replyName : string, replyUrl : string, content : string){
     let data = {
       videoId : videoId,
       content : content,

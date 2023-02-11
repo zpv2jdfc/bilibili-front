@@ -19,6 +19,8 @@ import { VideoComponent } from './watch/video/video.component';
 import { LeftVideoComponent } from './watch/video/left-video/left-video.component';
 import { RightRecommendComponent } from './watch/video/right-recommend/right-recommend.component';
 import { NotFoundComponent } from './error/not-found/not-found.component';
+import { SubmissionComponent } from './submission/submission.component';
+import { SubmitPageComponent } from './submission/submit-page/submit-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +34,9 @@ import { NotFoundComponent } from './error/not-found/not-found.component';
     VideoComponent,
     LeftVideoComponent,
     RightRecommendComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SubmissionComponent,
+    SubmitPageComponent
   ],
   imports: [
     BrowserModule,
