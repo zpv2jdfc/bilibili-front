@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {InfoService} from "./info.service";
+import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,12 +10,12 @@ export class UploadService {
 
   constructor(private http: HttpClient, private infoService : InfoService) { }
 
+  private subject = new Subject<any>();
   /**
    * 把文件分片后发送到服务端
    * @param file
    */
   submit(file : any){
-
     let md5 = SparkMD5.ArrayBuffer.hash(file);
     let max = 1024 * 1024;
     let count = Math.ceil(file.size / max);
@@ -35,6 +37,10 @@ export class UploadService {
     index = 0;
     const finalled = () => {
       index ++;
+      this.subject.next({
+        index : index,
+        count : count,
+      })
       if(index < count) return;
       // 当所有切片上传成功，调用后端合并切片的请求，进行切片合并操作
       this.merge(md5, count)
@@ -72,7 +78,27 @@ export class UploadService {
       total : count,
     }
     this.http.post(this.infoService.base_url+'/file/merge',data, {headers : this.infoService.headers}).subscribe((data)=>{
-
+      this.subject.next({
+        index : -1,
+        count : -1,
+      })
     })
+  }
+
+  /**
+   * 观察者
+   */
+  getMessage() : Observable<any>{
+    return this.subject.asObservable();
+  }
+
+  uploadInfo(title:string, cover:string, descript:string, label:string) : Observable<any>{
+    let data = {
+      title : title,
+      cover : cover,
+      descript : descript,
+      label : label
+    }
+    return this.http.post(this.infoService.base_url+'/video/upload', data , {headers : this.infoService.headers})
   }
 }
