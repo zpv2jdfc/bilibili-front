@@ -15,12 +15,12 @@ export class InfoService {
   headers = new HttpHeaders();
   info = {
     id: '',
-    name:'',
+    nickName:'',
     signature:'',
     avatar:this.domain_url+'/avatar/unlog.jpg',
     level:'',
     privilege:'',
-    status:'',
+    status:0,
     setting:'',
   }
   init(){
@@ -30,7 +30,9 @@ export class InfoService {
       this.token = temp1;
       this.info = JSON.parse(temp2)
       this.log_state = true;
-      this.headers.append('token', temp1)
+      // this.headers = new HttpHeaders({'token':temp1, 'id' : String(this.info.id)});
+      this.headers = this.headers.append('token', temp1)
+      this.headers = this.headers.append('id', String(this.info.id))
     }
   }
   setLocal(info:any, token:string){
@@ -41,12 +43,12 @@ export class InfoService {
   clear() {
     this.info = {
       id: '',
-      name:'',
+      nickName:'',
       signature:'',
       avatar:this.domain_url+'/avatar/unlog.jpg',
       level:'',
       privilege:'',
-      status:'',
+      status:0,
       setting:'',
     }
     localStorage.removeItem('token')

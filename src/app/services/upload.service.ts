@@ -92,13 +92,13 @@ export class UploadService {
     return this.subject.asObservable();
   }
 
-  uploadInfo(title:string, cover:string, descript:string, label:string) : Observable<any>{
-    let data = {
-      title : title,
-      cover : cover,
-      descript : descript,
-      label : label
-    }
-    return this.http.post(this.infoService.base_url+'/video/upload', data , {headers : this.infoService.headers})
+  uploadInfo(title:string, cover:any, descript:string, label:string) : Observable<any>{
+    let fm = new FormData();
+    fm.append('title',title)
+    fm.append('cover',cover)
+    fm.append('descript',descript)
+    fm.append('label',label)
+
+    return this.http.post(this.infoService.base_url+'/video/upload', fm , {headers : this.infoService.headers})
   }
 }

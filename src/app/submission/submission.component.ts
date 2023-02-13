@@ -12,4 +12,12 @@ import {InfoService} from "../services/info.service";
 export class SubmissionComponent {
   constructor(private route: ActivatedRoute, private videoService : VideoService,
               public uiService : UiService, private infoService : InfoService) {}
+  ngOnInit(){
+      this.infoService.init();
+      if(this.infoService.log_state){
+        this.uiService.logreg_window = false
+      }else {
+
+      }
+  }
 }

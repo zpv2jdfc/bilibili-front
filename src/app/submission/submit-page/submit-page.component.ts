@@ -34,7 +34,7 @@ export class SubmitPageComponent {
 
   // 视频基本信息
   title : string;
-  cover : string;
+  cover : any;
   descript : string;
   label : string;
   constructor(private uploadService : UploadService) {
@@ -94,7 +94,7 @@ export class SubmitPageComponent {
         var ctx = canvas.getContext("2d");
         ctx.fillRect(0, 0, imgWidth , imgHeight);
         ctx.drawImage(videoElement, x, y, imgWidth, imgHeight);
-        let src = canvas.toDataURL("image/png"); // 完成base64图片的创建
+        let src = canvas.toDataURL("image/jpeg",0.1); // 完成base64图片的创建
         this.coverblob(src)
     })
   }
