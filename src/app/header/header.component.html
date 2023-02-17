@@ -41,7 +41,7 @@
         <ng-template [ngIf]="infoService.log_state">
             <li class="v-popover-wrap header-avatar-wrap">
                 <div class="header-avatar-wrap">
-                    <a href="/" target="_blank" class="header-entry-mini">
+                    <a [href]="infoService.info.url" target="_blank" class="header-entry-mini">
                         <picture class="v-img">
                             <img [src]="infoService.info.avatar" alt="" loading="lazy" onload="">
 <!--                            <img src="https://i2.hdslb.com/bfs/face/99953a4bdcb321329a40a87ef467b9eb28b483d0.jpg@120w_120h_1c" alt="" loading="lazy" onload="">-->

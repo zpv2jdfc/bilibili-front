@@ -15,7 +15,7 @@ export class UploadService {
    * 把文件分片后发送到服务端
    * @param file
    */
-  submit(file : any){
+  submit(file : any) : string{
     let md5 = SparkMD5.ArrayBuffer.hash(file);
     let max = 1024 * 1024;
     let count = Math.ceil(file.size / max);
@@ -67,6 +67,7 @@ export class UploadService {
       })
 
     })
+    return md5;
   }
 
   /**
@@ -92,12 +93,13 @@ export class UploadService {
     return this.subject.asObservable();
   }
 
-  uploadInfo(title:string, cover:any, descript:string, label:string) : Observable<any>{
+  uploadInfo(title:string, cover:any, descript:string, label:string, md5:string) : Observable<any>{
     let fm = new FormData();
     fm.append('title',title)
     fm.append('cover',cover)
     fm.append('descript',descript)
     fm.append('label',label)
+    fm.append('md5', md5)
 
     return this.http.post(this.infoService.base_url+'/video/upload', fm , {headers : this.infoService.headers})
   }

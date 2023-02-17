@@ -21,6 +21,8 @@ import { RightRecommendComponent } from './watch/video/right-recommend/right-rec
 import { NotFoundComponent } from './error/not-found/not-found.component';
 import { SubmissionComponent } from './submission/submission.component';
 import { SubmitPageComponent } from './submission/submit-page/submit-page.component';
+import { ProfileComponent } from './profile/profile.component';
+import { UserInfoComponent } from './profile/user-info/user-info.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +38,9 @@ import { SubmitPageComponent } from './submission/submit-page/submit-page.compon
     RightRecommendComponent,
     NotFoundComponent,
     SubmissionComponent,
-    SubmitPageComponent
+    SubmitPageComponent,
+    ProfileComponent,
+    UserInfoComponent,
   ],
   imports: [
     BrowserModule,

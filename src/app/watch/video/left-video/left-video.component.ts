@@ -43,7 +43,7 @@ export class LeftVideoComponent {
   // 评论列表
   comment_list : any
   // 评论输入框
-  comment_content : any
+  comment_content : string
   // 回复输入框
   reply_content : string = ''
   // 回复 placeholder， 回复 @XXX:
@@ -71,9 +71,11 @@ export class LeftVideoComponent {
     this.videoService.loadComment(this.video_info.id).subscribe((data: any) => {
       this.comment_list = data.data
       for(let item of this.comment_list){
-        item.user.avatar = this.infoService.domain_url + item.user.avatar;
+        if(item.user.avatar=='default'||item.user.avatar==null||item.user.avatar=='')
+          item.user.avatar = this.infoService.domain_url+'/avatar/default.jpg';
         for(let subItem of item.subComment){
-          subItem.user.avatar = this.infoService.domain_url + subItem.user.avatar;
+          if(subItem.user.avatar == 'default' || subItem.user.avatar==null || subItem.user.avatar=='')
+          subItem.user.avatar = this.infoService.domain_url +'/avatar/default.jpg';
         }
         item['commentState'] = false;
       }
@@ -128,9 +130,11 @@ export class LeftVideoComponent {
 
   //发送弹幕
   biu(){
-    console.log(this.biu_content)
+    if(this.biu_content==null || this.biu_content=='')
+      return;
     this.videoService.biu(this.video_info.id, this.biu_content, this.video.nativeElement.currentTime).subscribe(data=>{
       console.log(data)
+      this.biu_content = ''
     });
   }
   loadBiu(videoId:number,begin:number, end:number){
@@ -140,7 +144,7 @@ export class LeftVideoComponent {
         item.time = item.biu_time;
         item.x=792;
         item.y=Math.floor(Math.random()*330);
-        item.speed=item.content.length/5
+        item.speed=item.content.length
         delete item.biu_time;
         biu_temp.offer(item);
       }
@@ -163,10 +167,10 @@ export class LeftVideoComponent {
     this.biu_que = new Queue<{}>();
     this.biu_loaded = new Queue();
     //初始加载20s弹幕，位置从最右端开始
-    this.biu_que.offer({x:792,y:100,content:'100',speed:1})
-    this.biu_que.offer({x:792,y:200,content:'100',speed:1})
-    this.biu_que.offer({x:792,y:200,content:'100',speed:1})
-    this.biu_que.offer({x:792,y:200,content:'100',speed:1})
+    // this.biu_que.offer({x:792,y:100,content:'100',speed:1})
+    // this.biu_que.offer({x:792,y:200,content:'100',speed:1})
+    // this.biu_que.offer({x:792,y:200,content:'100',speed:1})
+    // this.biu_que.offer({x:792,y:200,content:'100',speed:1})
     this.loadBiu(this.video_info.id,0,20);
     this.biu_end_time = 20;
   }
@@ -186,12 +190,16 @@ export class LeftVideoComponent {
   }
 // 发送评论
   send_comment(){
+    if(this.comment_content==null || this.comment_content=='')
+      return;
     this.videoService.sendComment(this.video_info.id, this.comment_content).subscribe(
       (data )=>{
-        console.log(data);
+        this.comment_content = null
       }
     )
+
   }
+
   reply(item : any){
     let state = ~item.commentState;
     for(let temp of this.comment_list){
@@ -227,10 +235,12 @@ export class LeftVideoComponent {
   send_reply(){
     if(this.current_reply_obj==null)
       return;
+    if(this.reply_content==null || this.reply_content=='')
+      return;
     this.videoService.sendSubComment(this.video_info.id, this.current_root_obj.id, this.current_reply_obj.user.id,
       this.current_reply_obj.user.name, this.current_reply_obj.user.url, this.reply_content).subscribe(
       (data)=>{
-
+        this.reply_content='';
       }
     )
   }

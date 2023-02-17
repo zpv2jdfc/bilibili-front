@@ -15,7 +15,7 @@ export class VideoService {
       content : content,
       dateTime : new Date()
     }
-    return this.http.post(this.infoService.base_url+'/video/addComment',data,{observe : "response"});
+    return this.http.post(this.infoService.base_url+'/video/addComment',data,{headers:this.infoService.headers, observe : "response"});
   }
   sendSubComment(videoId : number, parentId : number, replyId : number, replyName : string, replyUrl : string, content : string){
     let data = {
@@ -25,7 +25,7 @@ export class VideoService {
       replyId : replyId,
       dateTime : new Date()
     }
-    return this.http.post(this.infoService.base_url+'/video/addSubComment',data,{observe : "response"});
+    return this.http.post(this.infoService.base_url+'/video/addSubComment',data,{headers:this.infoService.headers,observe : "response"});
   }
   loadComment(videoId : number){
     let data = {

@@ -46,8 +46,9 @@ export class WatchComponent {
             location.replace("404")
           }else {
             let temp = data.data;
-            temp.url = this.infoService.src_url + data.data.url;
-            temp.tags = data.data.tags.split(';');
+            temp.url = this.infoService.src_url + '/video/' + data.data.url +'/' + data.data.url +'.m3u8';
+            if(data.data.tags!=null && data.data.tags!='')
+              temp.tags = data.data.tags.split(';');
             this.video_info.next(temp);
           }
       }

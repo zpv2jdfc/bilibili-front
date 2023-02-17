@@ -22,6 +22,7 @@ export class InfoService {
     privilege:'',
     status:0,
     setting:'',
+    url:'',
   }
   init(){
     let temp1 = localStorage.getItem('token');
@@ -29,6 +30,7 @@ export class InfoService {
     if(temp1!=null && temp1.length>0 && temp2!=null && temp2.length>0){
       this.token = temp1;
       this.info = JSON.parse(temp2)
+      this.info.url = '/profile/' + this.info.id
       this.log_state = true;
       // this.headers = new HttpHeaders({'token':temp1, 'id' : String(this.info.id)});
       this.headers = this.headers.append('token', temp1)
@@ -36,7 +38,8 @@ export class InfoService {
     }
   }
   setLocal(info:any, token:string){
-    info.avatar = this.domain_url + info.avatar;
+    if(info.avatar==null || info.avatar == 'default' || info.avatar =='')
+        info.avatar = this.domain_url + '/avatar/default.jpg'
     localStorage.setItem('info', JSON.stringify(info));
     localStorage.setItem('token', token);
   }
@@ -50,6 +53,7 @@ export class InfoService {
       privilege:'',
       status:0,
       setting:'',
+      url:'',
     }
     localStorage.removeItem('token')
     localStorage.removeItem('info')

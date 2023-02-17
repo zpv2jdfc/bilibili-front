@@ -81,7 +81,7 @@
         </div>
 <!--        输入评论-->
         <div style="width: 100%;height: 100%">
-          <textarea class="comment-input-area" [(ngModel)]="comment_content" placeholder="发一条友善的评论"></textarea>
+          <textarea class="comment-input-area" name="comment_content" [(ngModel)]="comment_content"  placeholder="发一条友善的评论"></textarea>
         </div>
 <!--        发布-->
         <div (click)="send_comment()" style="cursor: pointer; width: 70px;height: 100%; margin-left: 10px;background-color: #1890ff;align-items: center;justify-content: center;display: flex; border-radius: 4px;">

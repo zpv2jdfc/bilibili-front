@@ -37,6 +37,7 @@ export class SubmitPageComponent {
   cover : any;
   descript : string;
   label : string;
+  fileMd5 : string;
   constructor(private uploadService : UploadService) {
   }
   selectedFile : any;
@@ -48,7 +49,7 @@ export class SubmitPageComponent {
     this.uploading = true;
     this.title = e.target.files[0].name.substring(0,e.target.files[0].name.lastIndexOf('.'));
     this.current_file = e.target.files[0];
-    this.uploadService.submit(e.target.files[0]);
+    this.fileMd5 = this.uploadService.submit(e.target.files[0]);
   }
 
   ngOnInit(){
@@ -94,7 +95,7 @@ export class SubmitPageComponent {
         var ctx = canvas.getContext("2d");
         ctx.fillRect(0, 0, imgWidth , imgHeight);
         ctx.drawImage(videoElement, x, y, imgWidth, imgHeight);
-        let src = canvas.toDataURL("image/jpeg",0.1); // 完成base64图片的创建
+        let src = canvas.toDataURL("image/jpeg",0.3); // 完成base64图片的创建
         this.coverblob(src)
     })
   }
@@ -102,7 +103,7 @@ export class SubmitPageComponent {
     this.cover = src
   }
   upload(){
-    this.uploadService.uploadInfo(this.title,this.cover,this.descript,this.label).subscribe(
+    this.uploadService.uploadInfo(this.title,this.cover,this.descript,this.label,this.fileMd5).subscribe(
       data=>{
         this.chooseFile = false;
         this.uploading = false;
