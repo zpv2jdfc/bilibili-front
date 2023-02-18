@@ -1,0 +1,22 @@
+<div class="recommended-container">
+  <div class="recommend-grid-item" *ngFor="let item of video_list; index as i">
+    <div style="height: 70%;">
+      <a [href]="item.url" target="_blank">
+        <picture style="border-radius: 5px; width: 264px; height: 148px">
+          <img style="border-radius: 5px; width: 264px; height: 148px"
+               [src]="item.cover">
+        </picture>
+      </a>
+      <!--      标题-->
+      <a style="font-weight: 500; line-height: 1.25;" target="_blank" [href]="item.url">{{item.title}}</a>
+    </div>
+    <!--      up主-->
+    <div style="padding-top: 40px; align-items: center">
+      <a style="align-items: center; justify-content: flex-start;" [href]="item.owner.url" target="_blank">
+        <img src="assets/svgIcons/owner.svg" style="height: 16px; width: 16px;fill: #9499a0">
+        <span style="font-weight: 400;color: #9499a0; align-items: center; justify-content: flex-start;">{{item.owner.name}}</span>
+        <span style="margin-left:4px; font-weight: 400;color: #9499a0; align-items: center; justify-content: flex-start;"> · {{item.upTime}}</span>
+      </a>
+    </div>
+  </div>
+</div>

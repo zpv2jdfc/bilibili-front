@@ -20,9 +20,9 @@
         <div class="center-search-bar">
             <form class="nav-searchform">
                 <div class="nav-search-content">
-                    <input class="nav-search-input" type="text" autocomplete="off">
+                    <input class="nav-search-input" type="text" autocomplete="off" name="asd" [(ngModel)]="search_content " (keyup.enter)="search()">
                 </div>
-                <div class="nav-search-btn">
+                <div class="nav-search-btn" (click)="search()">
                     <img src="assets/svgIcons/search-btn.svg">
                 </div>
             </form>

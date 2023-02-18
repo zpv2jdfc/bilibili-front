@@ -15,8 +15,8 @@ export class UploadService {
    * 把文件分片后发送到服务端
    * @param file
    */
-  submit(file : any) : string{
-    let md5 = SparkMD5.ArrayBuffer.hash(file);
+  submit(file : any, md5 : string) : string{
+
     let max = 1024 * 1024;
     let count = Math.ceil(file.size / max);
     let index = 0;

@@ -23,6 +23,8 @@ import { SubmissionComponent } from './submission/submission.component';
 import { SubmitPageComponent } from './submission/submit-page/submit-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserInfoComponent } from './profile/user-info/user-info.component';
+import { SearchPageComponent } from './search-page/search-page.component';
+import { SearchResultComponent } from './search-page/search-result/search-result.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +43,8 @@ import { UserInfoComponent } from './profile/user-info/user-info.component';
     SubmitPageComponent,
     ProfileComponent,
     UserInfoComponent,
+    SearchPageComponent,
+    SearchResultComponent,
   ],
   imports: [
     BrowserModule,

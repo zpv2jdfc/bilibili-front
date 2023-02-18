@@ -55,4 +55,11 @@ export class VideoService {
     }
     return this.http.post(this.infoService.base_url+'/video/biu',JSON.stringify(data),{headers : headers});
   }
+
+  searchVideoBytitle(title:string) : Observable<any>{
+    let data = {
+      title:title
+    }
+    return this.http.get(this.infoService.base_url+'/video/all',{params:data});
+  }
 }

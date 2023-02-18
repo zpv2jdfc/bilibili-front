@@ -1,0 +1,15 @@
+.recommended-container {
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  grid-template-rows: repeat(2,2fr);
+  grid-gap: 15px;
+  padding: 0 60px 0 60px;
+  margin-top: 50px;
+}
+.recommend-grid-item{
+  height: 223px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
