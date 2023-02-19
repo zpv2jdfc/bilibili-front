@@ -90,56 +90,56 @@ export class SubmitPageComponent {
     let videoElement = <HTMLVideoElement>document.createElement('video');
     videoElement.src  = URL.createObjectURL(this.current_file);
     videoElement.currentTime = 1;
-    videoElement.load()
-    videoElement.oncanplay = ()=>{
-      console.log(videoElement.getBoundingClientRect())
-      let videoWidth = videoElement.width;
-      let videoHeight = videoElement.height;
-      let x = 0, y = 0, width = 0, height = 0;
-      // 计算缩小后图片的宽高以及canvas绘制的位置信息
-      if (videoWidth / videoHeight >= 1.5) {
-        width = imgWidth ;
-        height = videoHeight * (imgWidth / videoWidth);
-        x = 0;
-        y = (imgHeight- height) / 2;
-      } else {
-        height = imgHeight;
-        width = videoWidth * (imgHeight / videoHeight);
-        y = 0;
-        x = (imgWidth - width) / 2;
-      }
-      var canvas = <HTMLCanvasElement>document.getElementById('canvasElement');
-      var ctx = canvas.getContext("2d");
-      ctx.fillRect(0, 0, imgWidth , imgHeight);
-      ctx.drawImage(videoElement, x, y, width, height);
-      // ctx.drawImage(videoElement, x, y, imgWidth, imgHeight);
-      let src = canvas.toDataURL("image/jpeg",0.3); // 完成base64图片的创建
-      this.coverblob(src)
-    }
-    // videoElement.addEventListener("loadeddata",()=>{
-    //     let videoWidth = imgWidth;
-    //     let videoHeight = imgHeight;
-    //     let x = 0, y = 0, width = 0, height = 0;
-    //     // 计算缩小后图片的宽高以及canvas绘制的位置信息
-    //     if (videoWidth / videoHeight >= 1.5) {
-    //       width = imgWidth ;
-    //       height = videoHeight * (imgWidth / videoWidth);
-    //       x = 0;
-    //       y = (imgHeight- height) / 2;
-    //     } else {
-    //       height = imgHeight;
-    //       width = videoWidth * (imgHeight / videoHeight);
-    //       y = 0;
-    //       x = (imgWidth - width) / 2;
-    //     }
-    //     var canvas = <HTMLCanvasElement>document.getElementById('canvasElement');
-    //     var ctx = canvas.getContext("2d");
-    //     ctx.fillRect(0, 0, width , height);
-    //     ctx.drawImage(videoElement, x, y, imgWidth, imgHeight);
-    //     // ctx.drawImage(videoElement, x, y, imgWidth, imgHeight);
-    //     let src = canvas.toDataURL("image/jpeg",0.3); // 完成base64图片的创建
-    //     this.coverblob(src)
-    // })
+    // videoElement.load()
+    // videoElement.oncanplay = ()=>{
+    //   console.log(videoElement.getBoundingClientRect())
+    //   let videoWidth = videoElement.width;
+    //   let videoHeight = videoElement.height;
+    //   let x = 0, y = 0, width = 0, height = 0;
+    //   // 计算缩小后图片的宽高以及canvas绘制的位置信息
+    //   if (videoWidth / videoHeight >= 1.5) {
+    //     width = imgWidth ;
+    //     height = videoHeight * (imgWidth / videoWidth);
+    //     x = 0;
+    //     y = (imgHeight- height) / 2;
+    //   } else {
+    //     height = imgHeight;
+    //     width = videoWidth * (imgHeight / videoHeight);
+    //     y = 0;
+    //     x = (imgWidth - width) / 2;
+    //   }
+    //   var canvas = <HTMLCanvasElement>document.getElementById('canvasElement');
+    //   var ctx = canvas.getContext("2d");
+    //   ctx.fillRect(0, 0, imgWidth , imgHeight);
+    //   ctx.drawImage(videoElement, x, y, width, height);
+    //   // ctx.drawImage(videoElement, x, y, imgWidth, imgHeight);
+    //   let src = canvas.toDataURL("image/jpeg",0.3); // 完成base64图片的创建
+    //   this.coverblob(src)
+    // }
+    videoElement.addEventListener("loadeddata",()=>{
+        let videoWidth = imgWidth;
+        let videoHeight = imgHeight;
+        let x = 0, y = 0, width = 0, height = 0;
+        // 计算缩小后图片的宽高以及canvas绘制的位置信息
+        if (videoWidth / videoHeight >= 1.5) {
+          width = imgWidth ;
+          height = videoHeight * (imgWidth / videoWidth);
+          x = 0;
+          y = (imgHeight- height) / 2;
+        } else {
+          height = imgHeight;
+          width = videoWidth * (imgHeight / videoHeight);
+          y = 0;
+          x = (imgWidth - width) / 2;
+        }
+        var canvas = <HTMLCanvasElement>document.getElementById('canvasElement');
+        var ctx = canvas.getContext("2d");
+        ctx.fillRect(0, 0, width , height);
+        ctx.drawImage(videoElement, 0, 0);
+        // ctx.drawImage(videoElement, x, y, imgWidth, imgHeight);
+        let src = canvas.toDataURL("image/jpeg",0.3); // 完成base64图片的创建
+        this.coverblob(src)
+    })
   }
   coverblob(src:string){
     this.cover = src

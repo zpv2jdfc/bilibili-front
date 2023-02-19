@@ -163,6 +163,7 @@
   background-color: #00AEEC;
   font-size: 14px;
   color: #fff;
+  user-select: none;
 }
 .header-entry-mini{
     position: absolute;
@@ -210,6 +211,7 @@
     font-size: 14px;
     line-height: 20px;
     cursor: pointer;
+    user-select: none;
 }
 .header-upload-entry img{
     fill: #E3E5E7;

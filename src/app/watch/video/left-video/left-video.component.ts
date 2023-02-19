@@ -5,6 +5,7 @@ import {interval, Observable, take, timer} from 'rxjs';
 import { map, takeWhile, tap } from 'rxjs/operators';
 import {VideoService} from 'src/app/services/video.service'
 import {InfoService} from "../../../services/info.service";
+import {UiService} from "../../../services/ui.service";
 @Component({
   selector: 'app-left-video',
   templateUrl: './left-video.component.html',
@@ -53,7 +54,8 @@ export class LeftVideoComponent {
   // 当前要回复的对象
   current_reply_obj : any
   constructor(private videoService : VideoService,
-              public infoService : InfoService) {
+              public infoService : InfoService,
+              private uiService : UiService) {
   }
   ngOnInit(){
     this.hls = new HLS();
@@ -130,6 +132,11 @@ export class LeftVideoComponent {
 
   //发送弹幕
   biu(){
+    //未登录不能发送弹幕
+    if(this.infoService.log_state == false){
+      this.uiService.logreg_window = true;
+      return;
+    }
     if(this.biu_content==null || this.biu_content=='')
       return;
     this.videoService.biu(this.video_info.id, this.biu_content, this.video.nativeElement.currentTime).subscribe(data=>{
@@ -190,6 +197,11 @@ export class LeftVideoComponent {
   }
 // 发送评论
   send_comment(){
+    //未登录不能评论
+    if(this.infoService.log_state == false){
+      this.uiService.logreg_window = true;
+      return;
+    }
     if(this.comment_content==null || this.comment_content=='')
       return;
     this.videoService.sendComment(this.video_info.id, this.comment_content).subscribe(
@@ -201,6 +213,11 @@ export class LeftVideoComponent {
   }
 
   reply(item : any){
+    //未登录不能回复
+    if(this.infoService.log_state == false){
+      this.uiService.logreg_window = true;
+      return;
+    }
     let state = ~item.commentState;
     for(let temp of this.comment_list){
       temp.commentState = false;
@@ -217,6 +234,11 @@ export class LeftVideoComponent {
     }
   }
   sub_reply(item : any, sub_item : any){
+    //未登录不能回复
+    if(this.infoService.log_state == false){
+      this.uiService.logreg_window = true;
+      return;
+    }
     let state = ~item.commentState;
     for(let temp of this.comment_list){
       temp.commentState = false;
@@ -233,6 +255,11 @@ export class LeftVideoComponent {
     }
   }
   send_reply(){
+    //未登录不能回复
+    if(this.infoService.log_state == false){
+      this.uiService.logreg_window = true;
+      return;
+    }
     if(this.current_reply_obj==null)
       return;
     if(this.reply_content==null || this.reply_content=='')
