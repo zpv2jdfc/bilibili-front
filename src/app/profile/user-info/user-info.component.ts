@@ -39,6 +39,7 @@ export class UserInfoComponent {
           this.user_info.avatar = 'http://www.v-ming.com/avatar/default.jpg'
         }
         for(let video of data.data.videoList){
+          video.url = '/video/'+ video.id
           this.video_list.push(video)
         }
         if(this.video_list.length!=0) {

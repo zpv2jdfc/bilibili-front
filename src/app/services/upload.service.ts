@@ -11,11 +11,43 @@ export class UploadService {
   constructor(private http: HttpClient, private infoService : InfoService) { }
 
   private subject = new Subject<any>();
+  private alreadyUpload = []
   /**
    * 把文件分片后发送到服务端
    * @param file
    */
-  submit(file : any, md5 : string) : string{
+  checkChunk(md5:string) : Observable<any>{
+    let data = {
+      md5File:md5
+    }
+    return this.http.get(this.infoService.base_url+'/file/checkChunk', {params:data});
+  }
+  checkFile(md5:string) : Observable<any>{
+    let data = {
+      md5File:md5
+    }
+    return this.http.get(this.infoService.base_url+'/file/checkFile', {params:data});
+  }
+  submit(file : any, md5 : string) {
+    this.checkFile(md5).subscribe(
+      data=>{
+        if(data == true){
+          this.subject.next({
+            index : -1,
+            count : -1,
+          })
+        }else {
+          this.checkChunk(md5).subscribe(
+            data=>{
+              this.alreadyUpload = data.data;
+              this.submitFile(file, md5);
+            }
+          )
+        }
+      }
+    )
+  }
+  submitFile(file : any, md5 : string) : string{
 
     let max = 1024 * 1024;
     let count = Math.ceil(file.size / max);
@@ -54,6 +86,12 @@ export class UploadService {
       //   finalled();
       //   return;
       // }
+      for(let item of this.alreadyUpload){
+        if(item==chunk.chunk){
+          finalled();
+          return;
+        }
+      }
       let fm = new FormData();
       fm.append('file', chunk.file);
       fm.append('chunk', chunk.chunk);

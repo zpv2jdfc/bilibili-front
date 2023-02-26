@@ -23,6 +23,7 @@ export class SearchResultComponent {
     this.videoService.searchVideoBytitle(this.search_content).subscribe(
       data=>{
         for(let video of data.data){
+          video.url = '/video/'+video.id;
           this.video_list.push(video);
         }
       }

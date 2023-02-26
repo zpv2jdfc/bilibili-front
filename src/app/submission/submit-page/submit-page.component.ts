@@ -63,7 +63,8 @@ export class SubmitPageComponent {
       let value = event.target.result
       sparkMD52.append(value)
       let md5 = sparkMD52.end()
-      this.fileMd5 = this.uploadService.submit(e.target.files[0], md5);
+      this.fileMd5 = md5;
+      this.uploadService.submit(e.target.files[0], md5);
     }
   }
 
@@ -76,6 +77,7 @@ export class SubmitPageComponent {
         if(data.index==-1){
           this.tips = '上传成功'
           this.uploadFinished = true;
+          this.progressElement.nativeElement.style.width =  800 + 'px';
           this.createCover();
           return;
         }

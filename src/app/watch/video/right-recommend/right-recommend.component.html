@@ -1,25 +1,53 @@
-<div style="position: sticky; padding: 15px 0 250px 0;">
+<div style="position: sticky; padding: 15px 0 150px 50px;">
   <div class="owner">
     <div class="left-avatar">
-      <a href="">
-
+      <a [href]="upInfo.url" target="_blank">
+        <picture>
+          <img style="width: 48px; height: 48px; border-radius: 50%" [src]="upInfo.avatar">
+        </picture>
       </a>
     </div>
     <div class="right-intro">
       <div>
-        <a href="">
-          <span style="color: #18191c; font-weight: 500;font-size: 15px;">qww</span>
+        <a [href]="upInfo.url" target="_blank">
+          <span style="color: #18191c; font-weight: 500;font-size: 15px;">{{upInfo.name}}</span>
         </a>
       </div>
       <div>
-        <span style="color: #9499a0; font-weight: 400;font-size: 13px;">qwqw</span>
+        <span style="color: #9499a0; font-weight: 400;font-size: 13px;">{{upInfo.name}}</span>
       </div>
     </div>
   </div>
+  <div style="font-weight: 300; font-size: 20px; line-height: 20px; height: 20px; justify-content: center;margin-bottom: 20px;">
+    一小时热榜
+  </div>
   <div class="bottom-recommend">
-    <div class="recommend-card" *ngFor="let item of recommend_videos; index as i">
-      <div class="left-preview"></div>
-      <div class="right-video-intro"></div>
+    <div class="recommend-card" *ngFor="let video of recommend_videos; index as i">
+      <div class="left-preview">
+        <a [href]="video.url">
+          <picture>
+            <img style="width: 141px; height: 80px;border-radius: 5px;" [src]="video.cover">
+          </picture>
+        </a>
+      </div>
+      <div class="right-video-intro">
+        <a [href]="video.url">
+          <div style="font-size: 15px; height: 19px; line-height: 19px; font-weight: 500;cursor: pointer">
+            {{video.title}}
+          </div>
+        </a>
+        <div style="cursor: pointer; height: 19px; line-height: 19px; color: #9499a0;">
+          <a [href]="video.owner.url" target="_blank">
+            {{video.owner.name}}
+          </a>
+        </div>
+        <div style="color: #9499a0;">
+          <img src="assets/svgIcons/play.svg">
+          {{video.playNum}}&nbsp;&nbsp;
+          热度
+          {{video.temperature}}
+        </div>
+      </div>
     </div>
   </div>
 </div>

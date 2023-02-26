@@ -4,11 +4,16 @@
         <div class="bili-mini-content">
             <div class="bili-mini-login-wrapepr">
                 <!-- 登录方式切换标签 -->
-                <div class="bili-mini-tab">
+                <div style="display: flex; justify-content: center;">
+                  <div class="bili-mini-tab" (click)="changeLogType(1)">
                     <span>密码登录</span>
+                  </div>
+                  <div class="bili-mini-tab" (click)="changeLogType(2)">
+                    <span>邮箱登录</span>
+                  </div>
                 </div>
                 <!-- 账号密码输入框 -->
-                <div class="bili-mini-password-wrapper">
+                <div class="bili-mini-password-wrapper" *ngIf="logtype==1">
                     <div class="bili-mini-account">
                         <span class="text">账号</span>
                         <input type="text" placeholder="请输入账号" [(ngModel)]="username">
@@ -23,6 +28,26 @@
                         </div>
                     </div>
                 </div>
+              <!-- 邮箱注册 -->
+              <div class="bili-mini-password-wrapper" *ngIf="logtype==2">
+                <div class="bili-mini-account">
+                  <span class="text">邮箱</span>
+                  <input type="text" placeholder="请输入账号" [(ngModel)]="username">
+                </div>
+                <div class="bili-mini-account">
+                  <input type="text" placeholder="请输入验证码" [(ngModel)]="verificationCode">
+                  <span id="emailElement" class="text" (click)="disableEmail()">获取验证码{{countDown}}</span>
+                </div>
+<!--                <div class="bili-mini-password">-->
+<!--                  <div clss="left">-->
+<!--                    <span class="text">密码</span>-->
+<!--                    <input placeholder="请输入密码" type="password" [(ngModel)]="password">-->
+<!--                  </div>-->
+<!--                  <div class="eye-btn" style="&#45;&#45;thememini-color:#00a1d6;">-->
+<!--                    &lt;!&ndash; <EyeBtn></EyeBtn> &ndash;&gt;-->
+<!--                  </div>-->
+<!--                </div>-->
+              </div>
                 <div class="logerr" ng-if="logerr">
                     <p>{{err_msg}}</p>
                 </div>

@@ -57,6 +57,7 @@
     justify-content: center;
     height: 20px;
     user-select: none;
+  margin-right: 50px;
 }
 .bili-mini-password-wrapper{
     width: 100%;

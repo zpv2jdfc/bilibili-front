@@ -62,4 +62,13 @@ export class VideoService {
     }
     return this.http.get(this.infoService.base_url+'/video/all',{params:data});
   }
+  getHottest():Observable<any>{
+    return this.http.get(this.infoService.base_url+'/video/hottest');
+  }
+  getUpInfoByBVCode(code:string):Observable<any>{
+    let param = {
+      code:code,
+    }
+    return this.http.get(this.infoService.base_url+'/video/upInfo',{params:param});
+  }
 }

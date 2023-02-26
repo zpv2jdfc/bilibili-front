@@ -35,6 +35,7 @@ export class InfoService {
       // this.headers = new HttpHeaders({'token':temp1, 'id' : String(this.info.id)});
       this.headers = this.headers.append('token', temp1)
       this.headers = this.headers.append('id', String(this.info.id))
+      this.headers = this.headers.append('Authorization', temp1)
     }
   }
   setLocal(info:any, token:string){

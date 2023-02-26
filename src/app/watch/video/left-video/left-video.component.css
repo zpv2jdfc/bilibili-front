@@ -57,6 +57,9 @@
   margin: 24px 0;
   height: 102px;
   background-color: #59ca73;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .reply-item{
   margin-top: 14px;
