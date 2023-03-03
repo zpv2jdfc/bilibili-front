@@ -71,4 +71,21 @@ export class VideoService {
     }
     return this.http.get(this.infoService.base_url+'/video/upInfo',{params:param});
   }
+  thumb(bvcode:string, userid:string, ops) : Observable<any>{
+    let data = {
+      bvCode:bvcode,
+      userId : userid
+    }
+    if(ops==true){
+      return this.http.post(this.infoService.base_url+'/video/thumb', {},{params:data,headers: this.infoService.headers})
+    }else {
+      return this.http.post(this.infoService.base_url+'/video/unthumb', {},{params:data,headers: this.infoService.headers})
+    }
+  }
+  getthumb(bvcode:string) : Observable<any>{
+    let data = {
+      bvCode:bvcode,
+    }
+    return this.http.get(this.infoService.base_url+'/video/getthumb', {params:data});
+  }
 }

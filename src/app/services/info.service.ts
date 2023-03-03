@@ -6,6 +6,7 @@ import {HttpHeaders} from "@angular/common/http";
 })
 export class InfoService {
   base_url = '/api'
+  socket_url = '/ws'
   src_url = 'http://www.v-ming.com/src'
   profile_url = "http://www.v-ming.com/profile"
   domain_url = "http://www.v-ming.com"

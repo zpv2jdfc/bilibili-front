@@ -32,4 +32,11 @@ export class HeaderComponent {
     // this.router.navigate(['/all'], {queryParams: {key : this.search_content}});
     window.open('all?keyword='+this.search_content,"_blank");
   }
+  message(){
+    if(this.infoService.log_state==false){
+      this.uiService.logreg_window = true;
+    }else {
+      window.open('chat', '_blank')
+    }
+  }
 }

@@ -25,6 +25,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserInfoComponent } from './profile/user-info/user-info.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { SearchResultComponent } from './search-page/search-result/search-result.component';
+import { MessageComponent } from './message/message.component';
+import { TalkComponent } from './message/talk/talk.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +47,8 @@ import { SearchResultComponent } from './search-page/search-result/search-result
     UserInfoComponent,
     SearchPageComponent,
     SearchResultComponent,
+    MessageComponent,
+    TalkComponent,
   ],
   imports: [
     BrowserModule,

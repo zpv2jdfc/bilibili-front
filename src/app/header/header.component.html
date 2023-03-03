@@ -29,6 +29,10 @@
         </div>
     </div>
     <ul class="right-entry">
+        <div style="margin-right: 20px; cursor: pointer; align-items: center; justify-content: center;" (click)="message()">
+            <img src="assets/svgIcons/message.svg">
+            <div>私信</div>
+        </div>
         <ng-template [ngIf]="!infoService.log_state">
           <li class="v-popover-wrap header-avatar-wrap">
             <div class="header-avatar-wrap">

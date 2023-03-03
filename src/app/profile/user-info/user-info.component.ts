@@ -92,4 +92,13 @@ export class UserInfoComponent {
   check(){
     this.hideElement.nativeElement.click();
   }
+  chat(){
+    if(this.infoService.log_state==false){
+      this.uiService.logreg_window = true;
+    }else {
+      localStorage.setItem('talkWith', this.user_code);
+      window.open('/chat',"_blank")
+    }
+
+  }
 }

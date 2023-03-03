@@ -1,0 +1,7 @@
+<div style="display: flex; flex-direction: column;">
+  <app-header></app-header>
+  <app-talk></app-talk>
+  <ng-template [ngIf]="uiService.logreg_window">
+    <app-logreg></app-logreg>
+  </ng-template>
+</div>

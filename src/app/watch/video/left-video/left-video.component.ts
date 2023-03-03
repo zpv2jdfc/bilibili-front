@@ -6,6 +6,7 @@ import { map, takeWhile, tap } from 'rxjs/operators';
 import {VideoService} from 'src/app/services/video.service'
 import {InfoService} from "../../../services/info.service";
 import {UiService} from "../../../services/ui.service";
+import {dateComparator} from "@ng-bootstrap/ng-bootstrap/datepicker/datepicker-tools";
 @Component({
   selector: 'app-left-video',
   templateUrl: './left-video.component.html',
@@ -53,6 +54,8 @@ export class LeftVideoComponent {
   current_root_obj : any;
   // 当前要回复的对象
   current_reply_obj : any
+  //点赞状态
+  thumbed = false;
   constructor(private videoService : VideoService,
               public infoService : InfoService,
               private uiService : UiService) {
@@ -65,10 +68,16 @@ export class LeftVideoComponent {
       this.video.pause();});
     this.setBiu();
     //init variable
-    this.like_num_show = this.video_info.likeNum
-    if(this.video_info.likeNum>=10000){
-      this.like_num_show = (this.video_info.likeNum/10000).toFixed(1) + '万'
-    }
+    this.videoService.getthumb(this.video_info.id).subscribe(
+      data=>{
+        this.video_info.likeNum = data.data
+        this.like_num_show = this.video_info.likeNum
+        if(this.video_info.likeNum>=10000){
+          this.like_num_show = (this.video_info.likeNum/10000).toFixed(1) + '万'
+        }
+      }
+    )
+
     //加载评论
     this.videoService.loadComment(this.video_info.id).subscribe((data: any) => {
       this.comment_list = data.data
@@ -270,6 +279,34 @@ export class LeftVideoComponent {
         this.reply_content='';
       }
     )
+  }
+  thumb(){
+    if(this.thumbed==false){
+      this.videoService.thumb(this.video_info.id, this.infoService.info.id, true).subscribe(
+        data=>{
+          if(data==true){
+            this.video_info.likeNum+=1
+            this.like_num_show = this.video_info.likeNum
+            if(this.video_info.likeNum>=10000){
+              this.like_num_show = (this.video_info.likeNum/10000).toFixed(1) + '万'
+            }
+            document.getElementById("thumb").style.fill="#00AEEC"
+          }
+        }
+      )
+    }else {
+      this.videoService.thumb(this.video_info.id, this.infoService.info.id, false).subscribe(
+        data=>{
+          if(data==true){
+            this.video_info.likeNum-=1
+            this.like_num_show = this.video_info.likeNum
+            if(this.video_info.likeNum>=10000){
+              this.like_num_show = (this.video_info.likeNum/10000).toFixed(1) + '万'
+            }
+          }
+        }
+      )
+    }
   }
 }
 

@@ -6,6 +6,7 @@ import {NotFoundComponent} from "./error/not-found/not-found.component";
 import {SubmissionComponent} from "./submission/submission.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {SearchPageComponent} from "./search-page/search-page.component";
+import {MessageComponent} from "./message/message.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: '404', component: NotFoundComponent},
   {path: 'submit', component: SubmissionComponent},
   {path: 'all', component: SearchPageComponent},
+  {path: 'chat', component: MessageComponent},
 ];
 
 @NgModule({

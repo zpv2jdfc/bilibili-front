@@ -5,6 +5,12 @@
       "logLevel": "debug",
       "changeOrigin": true
     },
+    "/ws": {
+      "target": "ws://localhost:8080/api/websocket",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true
+    },
     "/src": {
       "target": "http://1.116.112.80",
       "secure": false,
