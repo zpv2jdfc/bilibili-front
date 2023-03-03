@@ -173,4 +173,7 @@ export class TalkComponent implements OnInit{
       }
     }
   }
+  ngOnDestroy() {
+    this.websocketService.disConnect();
+  }
 }

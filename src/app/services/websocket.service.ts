@@ -116,7 +116,11 @@ export class WebsocketService {
     this.stopRunTime();
     // throw new Error('webSocket connection closed:)');
   }
-
+  disConnect(){
+    console.log('连接关闭');
+    this.connectSuccess = false;
+    this.webSocket.close();
+  }
   /**
    * 连接异常
    * @author LiQun
