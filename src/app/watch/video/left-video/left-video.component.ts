@@ -43,7 +43,7 @@ export class LeftVideoComponent {
   // show info
   like_num_show : string
   // 评论列表
-  comment_list : any
+  comment_list : any;
   // 评论输入框
   comment_content : string
   // 回复输入框

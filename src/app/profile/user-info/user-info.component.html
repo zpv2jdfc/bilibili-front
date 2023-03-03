@@ -36,7 +36,7 @@
           </div>
         </div>
       </div>
-      <div style="margin: 110px 0 0 200px; width: 100px; height: 30px; background-color: #18191c; border-radius: 4px; color: #F1F2F3; text-align: center; line-height: 30px; user-select: none; cursor: pointer;">
+      <div *ngIf="myself==false" style="margin: 110px 0 0 200px; width: 100px; height: 30px; background-color: #18191c; border-radius: 4px; color: #F1F2F3; text-align: center; line-height: 30px; user-select: none; cursor: pointer;">
         <div (click)="chat()">发消息</div>
       </div>
     </div>
@@ -65,7 +65,9 @@
                 </picture>
               </a>
               <!--      标题-->
-              <a style="font-weight: 500; line-height: 1.25;" target="_blank" [href]="item.url">{{item.title}}</a>
+              <div>
+                <a style="font-weight: 500; line-height: 1.25;" target="_blank" [href]="item.url">{{item.title}}</a>
+              </div>
             </div>
           </div>
         </div>

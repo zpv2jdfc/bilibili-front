@@ -7,7 +7,7 @@
 .recommended-container {
   background-color: #fff;
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(3,1fr);
   grid-template-rows: repeat(2,2fr);
   grid-gap: 15px;
   padding: 0 60px 0 60px;
